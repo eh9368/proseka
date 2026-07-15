@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한세카 이벤트 맞헬퍼 모집 현황</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+  :root{
+    --bg: #f6f2fb;
+    --paper: #ffffff;
+    --ink: #3d3457;
+    --ink-soft: #7a6f93;
+    --lilac: #a78bfa;
+    --lilac-deep: #7c5cf2;
+    --gold: #f4c95d;
+    --open: #ffe4b8;
+    --open-ink: #a3661a;
+    --sold: #f3d2d2;
+    --sold-ink: #a34848;
+    --line: #e4d9f7;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 8% 12%, rgba(167,139,250,0.10) 0, transparent 40%),
+      radial-gradient(circle at 92% 85%, rgba(244,201,93,0.12) 0, transparent 40%);
+    font-family: 'Nanum Gothic', sans-serif;
+    color: var(--ink);
+    padding: 48px 16px 80px;
+  }
+
+  .wrap{ max-width: 720px; margin: 0 auto; }
+
+  header{
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  .eyebrow{
+    font-family: 'Gowun Dodum', sans-serif;
+    letter-spacing: 0.35em;
+    font-size: 12px;
+    color: var(--lilac-deep);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  h1{
+    font-family: 'Jua', sans-serif;
+    font-size: 34px;
+    line-height: 1.35;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+
+  h1 span{ color: var(--lilac-deep); }
+
+  header p{
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0 auto;
+    max-width: 440px;
+  }
+
+  .legend{
+    display:flex;
+    gap: 10px;
+    justify-content:center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .legend span{
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+
+  .legend .dot{
+    display:inline-block;
+    width:8px; height:8px;
+    border-radius:50%;
+    margin-right:6px;
+    vertical-align:middle;
+  }
+
+  .ticket{
+    position: relative;
+    background: var(--paper);
+    border-radius: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 20px -12px rgba(124,92,242,0.25);
+    display:flex;
+    overflow:hidden;
+    border: 1px solid var(--line);
+  }
+
+  .stub{
+    flex: 0 0 108px;
+    background: linear-gradient(160deg, var(--lilac) 0%, var(--lilac-deep) 100%);
+    color: #fff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding: 14px 8px;
+    position:relative;
+  }
+
+  .stub .no{
+    font-family:'Jua', sans-serif;
+    font-size: 11px;
+    opacity: 0.75;
+    letter-spacing: 0.05em;
+  }
+
+  .stub .date{
+    font-family:'Jua', sans-serif;
+    font-size: 17px;
+    line-height:1.3;
+    text-align:center;
+    margin-top: 6px;
+  }
+
+  .stub .date small{
+    display:block;
+    font-size: 11px;
+    font-weight: normal;
+    opacity: 0.85;
+  }
+
+  .perforation{
+    width: 0;
+    border-left: 2px dashed rgba(255,255,255,0.6);
+    position:relative;
+  }
+  .perforation::before, .perforation::after{
+    content:"";
+    position:absolute;
+    width: 16px; height:16px;
+    background: var(--bg);
+    border-radius: 50%;
+    left: -9px;
+  }
+  .perforation::before{ top: -8px; }
+  .perforation::after{ bottom: -8px; }
+
+  .body{
+    flex: 1;
+    padding: 16px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+  }
+
+  .title{
+    font-size: 15.5px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .badge{
+    flex: 0 0 auto;
+    font-family: 'Jua', sans-serif;
+    font-size: 12.5px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .badge.open{ background: var(--open); color: var(--open-ink); }
+  .badge.one{ background: #ffe9d6; color: #b25b1f; }
+  .badge.sold{ background: var(--sold); color: var(--sold-ink); }
+
+  footer{
+    text-align:center;
+    margin-top: 40px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  footer a{ color: var(--lilac-deep); font-weight:bold; text-decoration:none; }
+
+  @media (max-width: 480px){
+    .stub{ flex-basis: 86px; padding: 12px 6px; }
+    .stub .date{ font-size: 14.5px; }
+    .title{ font-size: 14.5px; }
+    h1{ font-size: 27px; }
+  }
+</style>
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=5509"></script>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Hansaeka Event Support</div>
+    <h1>한세카 이벤트 <span>맞헬퍼</span> 모집 현황</h1>
+    
+    <div class="legend">
+      <span><i class="dot" style="background:#f4c95d"></i>OPEN · 자리 있음</span>
+      <span><i class="dot" style="background:#e29a3c"></i>1자리 남음</span>
+      <span><i class="dot" style="background:#c96b6b"></i>마감</span>
+    </div>
+  </header>
+
+  <main id="list"></main>
+
+  <footer>
+    이 페이지는 신청 현황 공유용이며, 헬퍼 개인정보는 별도로 관리돼요.<br>
+    문의 및 신청은 <a href="https://open.kakao.com/o/smuIXXmi" target="_blank">오픈채팅</a>으로 부탁드립니다 🩷
+  </footer>
+
+</div>
+
+<script>
+const events = [
+  ["2026-07-23","2026-07-29","start rolling! stars' crossing",0],
+  ["2026-07-31","2026-08-06","Competitive fire!",0],
+  ["2026-08-08","2026-08-20","All ways Jump! with you",0],
+  ["2026-08-22","2026-08-28","풀리지 않는 내일에 손을 뻗어",0],
+  ["2026-08-30","2026-09-04","Deep Dark For Light",0],
+  ["2026-09-06","2026-09-18","Link the Beats!",0],
+  ["2026-09-25","2026-09-28","Wishes in Bloom!",0],
+  ["2026-09-30","2026-10-09","Our Golden Days",0],
+  ["2026-10-11","2026-10-19","너와 잇는 Heart Beat",0],
+  ["2026-10-21","2026-10-29","교차하는 색은 그날 그대로",0],
+  ["2026-10-31","2026-11-08","Colors of Pure Sense",0],
+  ["2026-11-10","2026-11-17","초극의 프로타고니스타",0],
+  ["2026-11-20","2026-11-28","Overcome one's limits",0],
+  ["2026-11-30","2026-12-08","올려다본 밤하늘에, 별은 뒤섞여",0],
+  ["2026-12-10","2026-12-19","함께, 트루 루트를 목표로",0],
+  ["2026-12-21","2026-12-29","이 이야기는 희망을 싣고",0],
+  ["2026-12-31","2027-01-09","새해를 축복하는, 기원의 춤",0],
+  ["2027-01-11","2027-01-19","깨어나지 않는 환상을 노크하며",0],
+  ["2027-01-21","2027-01-29","GO ALL OUT",0],
+  ["2027-01-31","2027-02-08","분쇄하라! 언발렌타인의 복수",0],
+  ["2027-02-10","2027-02-17","Path made by faith",0],
+  ["2027-02-19","2027-02-26","CHANGE! 에무는 왕녀님?!",0],
+  ["2027-02-28","2027-03-08","악몽의 정원을 노래로 밝히며",0],
+  ["2027-03-10","2027-03-18","Open up new horizons",0],
+  ["2027-03-20","2027-03-28","Amid the Wavering Light",0],
+  ["2027-03-30","2027-04-07","저녁빛의 Inside Direction",0],
+  ["2027-04-09","2027-04-16","Show 'em what's up!",0],
+  ["2027-04-18","2027-04-28","약속의 Passerelle",0],
+  ["2027-04-30","2027-05-06","따뜻한 추억을 더듬어",0],
+  ["2027-05-08","2027-05-15","Stay solid, No fold",0],
+  ["2027-05-17","2027-05-29","Great Yell for Dreamers!",0],
+  ["2027-05-31","2027-06-06","가장 먼 끝으로 날아가는 너에게",0],
+  ["2027-06-08","2027-06-18","Into the New Light",0],
+  ["2027-06-30","2027-07-07","아이돌 하나사토 미노리 ~ 꿈의 최전선 ~",0],
+  ["2027-07-09","2027-07-17","바래지 않는 지금을, 물들여",0],
+  ["2027-07-19","2027-07-29","너의 곁, 너와 바라보는 내일",0],
+];
+
+const monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+
+function fmt(d){
+  const [y,m,day] = d.split("-");
+  return { top: `${m}.${day}`, year: y };
+}
+
+function badge(filled){
+  if(filled >= 2) return ['sold','마감'];
+  if(filled === 1) return ['one','1자리 남음'];
+  return ['open','OPEN 2자리'];
+}
+
+const list = document.getElementById('list');
+
+let currentYear='';
+events.forEach((ev, i) => {
+  const [start, end, title, filled] = ev;
+  const s = fmt(start), e = fmt(end);
+  const [cls, label] = badge(filled);
+  if(currentYear!==s.year){
+    currentYear=s.year;
+    const y=document.createElement('div');
+    y.style.cssText='text-align:center;font-family:Jua,sans-serif;font-size:30px;color:var(--lilac-deep);margin:38px 0 18px;';
+    y.innerHTML=`✦ ${currentYear} ✦`;
+    list.appendChild(y);
+  }
+  const ticket = document.createElement('div');
+  ticket.className = 'ticket';
+  ticket.innerHTML = `
+    <div class="stub">
+      <div class="no">NO. ${String(i+1).padStart(2,'0')}</div>
+      <div class="date">${s.top}<small>~ ${e.top}</small></div>
+    </div>
+    <div class="perforation"></div>
+    <div class="body">
+      <div class="title">${title}</div>
+      <div class="badge ${cls}">${label}</div>
+    </div>
+  `;
+  list.appendChild(ticket);
+});
+</script>
+</body>
+</html>
