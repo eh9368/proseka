@@ -1,329 +1,1274 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>한세카 이벤트 맞헬퍼 모집 현황</title>
+<meta name="theme-color" content="#8b6df6" />
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Nanum+Gothic:wght@400;700;800&display=swap');
 
   :root{
-    --bg: #f6f2fb;
-    --paper: #ffffff;
-    --ink: #3d3457;
-    --ink-soft: #7a6f93;
-    --lilac: #a78bfa;
-    --lilac-deep: #7c5cf2;
-    --gold: #f4c95d;
-    --open: #ffe4b8;
-    --open-ink: #a3661a;
-    --sold: #f3d2d2;
-    --sold-ink: #a34848;
-    --line: #e4d9f7;
+    --bg:#f7f4fb;
+    --bg2:#f1ebfa;
+    --paper:#ffffff;
+    --ink:#312b42;
+    --ink-soft:#7c738e;
+    --line:#e7def5;
+    --lilac:#aa91fb;
+    --lilac-deep:#7a5be8;
+    --violet:#5e42d3;
+    --gold-soft:#fff3cf;
+    --gold-ink:#9d741d;
+    --rose-soft:#f7dddd;
+    --rose-ink:#a34d4d;
+    --green-soft:#def1e5;
+    --green-ink:#4f7e67;
+    --shadow:0 18px 46px rgba(87,66,137,.10);
+    --shadow-soft:0 10px 24px rgba(87,66,137,.08);
   }
 
-  *{ box-sizing: border-box; }
-
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{
     margin:0;
-    background: var(--bg);
-    background-image:
-      radial-gradient(circle at 8% 12%, rgba(167,139,250,0.10) 0, transparent 40%),
-      radial-gradient(circle at 92% 85%, rgba(244,201,93,0.12) 0, transparent 40%);
-    font-family: 'Nanum Gothic', sans-serif;
-    color: var(--ink);
-    padding: 48px 16px 80px;
+    min-height:100vh;
+    padding:30px 16px 72px;
+    color:var(--ink);
+    font-family:'Nanum Gothic',sans-serif;
+    background:
+      radial-gradient(circle at 8% 10%, rgba(170,145,251,.15), transparent 28%),
+      radial-gradient(circle at 92% 15%, rgba(233,197,107,.12), transparent 26%),
+      linear-gradient(180deg,var(--bg) 0%, var(--bg2) 100%);
   }
 
-  .wrap{ max-width: 720px; margin: 0 auto; }
+  button,input,select{font:inherit}
 
-  header{
-    text-align: center;
-    margin-bottom: 44px;
+  .app{
+    width:min(980px,100%);
+    margin:0 auto;
+  }
+
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:28px 28px 24px;
+    border-radius:28px;
+    border:1px solid #e7ddf7;
+    background:linear-gradient(145deg, rgba(255,255,255,.94), rgba(251,248,255,.85));
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(14px);
+  }
+
+  .hero::before,
+  .hero::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .hero::before{
+    width:220px;height:220px;
+    right:-90px; top:-100px;
+    background:radial-gradient(circle, rgba(122,91,232,.14), transparent 70%);
+  }
+  .hero::after{
+    width:160px;height:160px;
+    left:-70px; bottom:-70px;
+    background:radial-gradient(circle, rgba(233,197,107,.10), transparent 70%);
   }
 
   .eyebrow{
-    font-family: 'Gowun Dodum', sans-serif;
-    letter-spacing: 0.35em;
-    font-size: 12px;
-    color: var(--lilac-deep);
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    font-family:'Gowun Dodum',sans-serif;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.32em;
+    color:var(--lilac-deep);
+    margin-bottom:10px;
   }
 
   h1{
-    font-family: 'Jua', sans-serif;
-    font-size: 34px;
-    line-height: 1.35;
-    margin: 0 0 12px;
-    color: var(--ink);
+    margin:0;
+    font-family:'Jua',sans-serif;
+    font-size:clamp(28px,4vw,42px);
+    font-weight:400;
+    line-height:1.18;
+    letter-spacing:-.02em;
   }
 
-  h1 span{ color: var(--lilac-deep); }
+  h1 span{color:var(--lilac-deep)}
 
-  header p{
-    font-size: 14px;
-    color: var(--ink-soft);
-    line-height: 1.7;
-    margin: 0 auto;
-    max-width: 440px;
+  .sub{
+    margin:12px 0 0;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.75;
   }
 
-  .legend{
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:22px;
+  }
+
+  .stat{
+    padding:15px 16px;
+    border-radius:18px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.80);
+    box-shadow:0 8px 18px rgba(87,66,137,.04);
+  }
+
+  .stat .label{
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:.05em;
+    margin-bottom:7px;
+  }
+
+  .stat .value{
+    font-family:'Jua',sans-serif;
+    font-size:27px;
+    line-height:1;
+  }
+
+  .stat .value.open{color:var(--gold-ink)}
+  .stat .value.sold{color:var(--rose-ink)}
+
+  .notice{
+    margin-top:16px;
+    padding:14px 16px;
+    border-radius:16px;
+    border:1px solid var(--line);
+    border-left:5px solid var(--lilac-deep);
+    background:rgba(255,255,255,.80);
+    color:var(--ink-soft);
+    line-height:1.8;
+    font-size:13.5px;
+  }
+
+  .control-panel{
+    position:sticky;
+    top:12px;
+    z-index:10;
+    margin:20px 0 18px;
+    padding:14px;
+    border:1px solid #e7ddf7;
+    border-radius:20px;
+    background:rgba(255,255,255,.90);
+    box-shadow:var(--shadow-soft);
+    backdrop-filter:blur(14px);
+  }
+
+  .control-row{
+    display:grid;
+    grid-template-columns:minmax(0,1.7fr) repeat(3,minmax(120px,.52fr));
+    gap:10px;
+  }
+
+  .search-wrap{position:relative}
+  .search-wrap::before{
+    content:"⌕";
+    position:absolute;
+    top:50%;
+    left:14px;
+    transform:translateY(-50%);
+    color:var(--ink-soft);
+    font-size:20px;
+  }
+
+  .control{
+    width:100%;
+    height:44px;
+    border:1px solid var(--line);
+    border-radius:13px;
+    background:#fff;
+    color:var(--ink);
+    outline:none;
+    transition:.18s ease;
+  }
+
+  input.control{padding:0 14px 0 42px}
+  select.control{padding:0 34px 0 12px}
+
+  .control:focus{
+    border-color:rgba(122,91,232,.55);
+    box-shadow:0 0 0 4px rgba(122,91,232,.08);
+  }
+
+  .meta-row{
     display:flex;
-    gap: 10px;
-    justify-content:center;
-    margin-top: 20px;
-    flex-wrap: wrap;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-top:10px;
+    color:var(--ink-soft);
+    font-size:12px;
   }
 
-  .legend span{
-    font-size: 12px;
-    padding: 5px 12px;
-    border-radius: 999px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    color: var(--ink-soft);
+  .reset{
+    background:transparent;
+    border:0;
+    color:var(--lilac-deep);
+    font-weight:800;
+    cursor:pointer;
   }
 
-  .legend .dot{
-    display:inline-block;
-    width:8px; height:8px;
-    border-radius:50%;
-    margin-right:6px;
-    vertical-align:middle;
+  .timeline{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  .year-heading{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:18px 4px 2px;
+    font-family:'Jua',sans-serif;
+    color:var(--lilac-deep);
+    font-size:26px;
+  }
+
+  .year-heading::before,
+  .year-heading::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--line), transparent);
   }
 
   .ticket{
-    position: relative;
-    background: var(--paper);
-    border-radius: 18px;
-    margin-bottom: 18px;
-    box-shadow: 0 8px 20px -12px rgba(124,92,242,0.25);
-    display:flex;
+    position:relative;
+    display:grid;
+    grid-template-columns:146px 26px minmax(0,1fr);
+    min-height:132px;
+    border-radius:26px;
+    background:linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.90));
+    border:1px solid #e5daf7;
+    box-shadow:var(--shadow-soft);
     overflow:hidden;
-    border: 1px solid var(--line);
+    isolation:isolate;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+
+  .ticket:hover{
+    transform:translateY(-2px);
+    box-shadow:0 20px 38px rgba(87,66,137,.11);
+    border-color:#ddcff3;
+  }
+
+  .ticket::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(120deg, rgba(255,255,255,.35), transparent 18%),
+      radial-gradient(circle at 85% 75%, rgba(234,208,138,.10), transparent 20%);
+    pointer-events:none;
+    z-index:0;
   }
 
   .stub{
-    flex: 0 0 108px;
-    background: linear-gradient(160deg, var(--lilac) 0%, var(--lilac-deep) 100%);
-    color: #fff;
+    position:relative;
+    z-index:1;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    padding: 14px 8px;
-    position:relative;
-  }
-
-  .stub .no{
-    font-family:'Jua', sans-serif;
-    font-size: 11px;
-    opacity: 0.75;
-    letter-spacing: 0.05em;
-  }
-
-  .stub .date{
-    font-family:'Jua', sans-serif;
-    font-size: 17px;
-    line-height:1.3;
+    padding:18px 14px;
     text-align:center;
-    margin-top: 6px;
+    color:#fff;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0) 24%),
+      linear-gradient(160deg, var(--lilac) 0%, var(--violet) 100%);
   }
 
-  .stub .date small{
-    display:block;
-    font-size: 11px;
-    font-weight: normal;
-    opacity: 0.85;
+  .stub::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg, rgba(255,255,255,.18), transparent 34%);
+    pointer-events:none;
   }
 
   .perforation{
-    width: 0;
-    border-left: 2px dashed rgba(255,255,255,0.6);
     position:relative;
+    z-index:1;
+    background:
+      linear-gradient(180deg, rgba(245,241,252,.96), rgba(255,255,255,.96));
+    border-left:1px solid #ede5f9;
+    border-right:1px solid #ede5f9;
   }
-  .perforation::before, .perforation::after{
+
+  .perforation::before{
     content:"";
     position:absolute;
-    width: 16px; height:16px;
-    background: var(--bg);
-    border-radius: 50%;
-    left: -9px;
+    left:50%;
+    top:10px;
+    bottom:10px;
+    transform:translateX(-50%);
+    border-left:2px dashed rgba(122,91,232,.22);
   }
-  .perforation::before{ top: -8px; }
-  .perforation::after{ bottom: -8px; }
 
-  .body{
-    flex: 1;
-    padding: 16px 18px;
-    display:flex;
+  .ticket-main{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
     align-items:center;
-    justify-content:space-between;
-    gap: 12px;
+    gap:18px;
+    padding:20px 22px 20px 24px;
   }
 
-  .title{
-    font-size: 15.5px;
-    font-weight: 700;
-    line-height: 1.4;
-    color: var(--ink);
+  .event-no{
+    font-size:12px;
+    letter-spacing:.12em;
+    opacity:.78;
+    margin-bottom:6px;
+  }
+
+  .date{
+    font-family:'Jua',sans-serif;
+    font-size:18px;
+    line-height:1.18;
+  }
+
+  .date strong{
+    display:block;
+    font-size:26px;
+    margin:4px 0;
+  }
+
+  .date small{
+    display:block;
+    margin-top:4px;
+    font-size:11px;
+    opacity:.88;
+  }
+
+  .event-title{
+    margin:0 0 12px;
+    font-size:18px;
+    line-height:1.42;
+    font-weight:800;
+    letter-spacing:-.01em;
+    word-break:keep-all;
+  }
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    min-height:30px;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid #ddd2f4;
+    background:#faf8fd;
+    color:var(--ink-soft);
+    font-size:12px;
+    font-weight:800;
+  }
+
+  .chip.dday{
+    background:#f2edff;
+    color:#6950d8;
+  }
+
+  .chip.now{
+    background:var(--green-soft);
+    color:var(--green-ink);
+    border-color:#cfe7dc;
+  }
+
+  .chip.ended{
+    background:#f1eff5;
+    color:#8a8295;
+  }
+
+  .chip.stubby{
+    background:#fff;
+    color:var(--lilac-deep);
+  }
+
+  .status-side{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:10px;
   }
 
   .badge{
-    flex: 0 0 auto;
-    font-family: 'Jua', sans-serif;
-    font-size: 12.5px;
-    padding: 7px 13px;
-    border-radius: 999px;
-    white-space: nowrap;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:92px;
+    min-height:40px;
+    padding:8px 16px;
+    border-radius:999px;
+    font-family:'Jua',sans-serif;
+    font-size:13px;
+    letter-spacing:.02em;
+    white-space:nowrap;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.45);
   }
 
-  .badge.open{ background: var(--open); color: var(--open-ink); }
-    .badge.sold{ background: var(--sold); color: var(--sold-ink); }
+  .badge.open{
+    background:var(--gold-soft);
+    color:var(--gold-ink);
+  }
 
-  
-.notice{
-background:#fff;border:1px solid var(--line);border-left:5px solid var(--lilac-deep);
-border-radius:16px;padding:16px 18px;margin:25px auto 0;line-height:1.9;color:var(--ink-soft);font-size:14px;box-shadow:0 6px 18px rgba(124,92,242,.08);}
-.ticket.soldout{opacity:.7;filter:grayscale(.35);position:relative;}
-.ticket.soldout::before{content:"SOLD OUT";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-18deg);font:700 42px 'Jua',sans-serif;color:rgba(163,72,72,.12);pointer-events:none;}
-.ticket.soldout::after{content:"";position:absolute;top:0;right:-1px;width:20px;height:100%;background:radial-gradient(circle at left 10px,transparent 10px,var(--bg) 11px);background-size:20px 24px;}
+  .badge.sold{
+    background:var(--rose-soft);
+    color:var(--rose-ink);
+  }
 
+  .status-note{
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--ink-soft);
+    line-height:1.5;
+    text-align:right;
+  }
+
+  .serial{
+    margin-top:10px;
+    font-size:10.5px;
+    letter-spacing:.14em;
+    color:#9b90b0;
+  }
+  .ticket[data-recruitment="sold"]{
+    opacity:.88;
+  }
+
+  .empty{
+    display:none;
+    padding:46px 20px;
+    text-align:center;
+    border:1px dashed #d9cdee;
+    border-radius:20px;
+    background:rgba(255,255,255,.70);
+    color:var(--ink-soft);
+  }
 
   footer{
+    margin-top:30px;
     text-align:center;
-    margin-top: 40px;
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    line-height: 1.8;
+    color:var(--ink-soft);
+    font-size:12.5px;
+    line-height:1.8;
   }
 
-  footer a{ color: var(--lilac-deep); font-weight:bold; text-decoration:none; }
+  footer a{
+    color:var(--lilac-deep);
+    font-weight:800;
+    text-decoration:none;
+  }
 
-  @media (max-width: 480px){
-    .stub{ flex-basis: 86px; padding: 12px 6px; }
-    .stub .date{ font-size: 14.5px; }
-    .title{ font-size: 14.5px; }
-    h1{ font-size: 27px; }
+
+  @keyframes ticketEnter{
+    from{
+      opacity:0;
+      transform:translateY(14px) scale(.992);
+    }
+    to{
+      opacity:1;
+      transform:translateY(0) scale(1);
+    }
+  }
+
+  @keyframes badgePop{
+    0%{
+      opacity:0;
+      transform:scale(.86);
+    }
+    75%{
+      opacity:1;
+      transform:scale(1.04);
+    }
+    100%{
+      opacity:1;
+      transform:scale(1);
+    }
+  }
+
+  @keyframes yearFade{
+    from{
+      opacity:0;
+      transform:translateY(8px);
+    }
+    to{
+      opacity:1;
+      transform:translateY(0);
+    }
+  }
+
+  .ticket{
+    opacity:0;
+    animation:ticketEnter .46s cubic-bezier(.2,.75,.2,1) forwards;
+    animation-delay:var(--delay,0ms);
+  }
+
+  .ticket .badge{
+    animation:badgePop .34s ease-out both;
+    animation-delay:calc(var(--delay,0ms) + 110ms);
+  }
+
+  .year-heading{
+    animation:yearFade .35s ease-out both;
+  }
+
+  .ticket:hover{
+    transform:translateY(-4px) scale(1.004);
+  }
+
+
+  @keyframes tearStub{
+    0%{
+      transform:translateX(0) rotate(0deg);
+      opacity:1;
+    }
+    35%{
+      transform:translateX(-6px) rotate(-2deg);
+    }
+    100%{
+      transform:translateX(-145px) rotate(-9deg);
+      opacity:0;
+    }
+  }
+
+  @keyframes tearLine{
+    0%{
+      transform:scaleY(1);
+      opacity:1;
+    }
+    45%{
+      transform:scaleY(1.08);
+      opacity:1;
+    }
+    100%{
+      transform:scaleY(.2);
+      opacity:0;
+    }
+  }
+
+  @keyframes ticketKick{
+    0%{
+      transform:translateX(0);
+    }
+    45%{
+      transform:translateX(7px);
+    }
+    100%{
+      transform:translateX(0);
+    }
+  }
+
+  .ticket[data-recruitment="open"]{
+    cursor:pointer;
+  }
+
+  .ticket[data-recruitment="open"] .stub,
+  .ticket[data-recruitment="open"] .perforation,
+  .ticket[data-recruitment="open"] .ticket-main{
+    will-change:transform,opacity;
+  }
+
+  .ticket.is-tearing .stub{
+    animation:tearStub .72s cubic-bezier(.22,.75,.18,1) forwards;
+  }
+
+  .ticket.is-tearing .perforation{
+    animation:tearLine .52s ease-out forwards;
+  }
+
+  .ticket.is-tearing .ticket-main{
+    animation:ticketKick .42s ease-out .18s;
+  }
+
+  .ticket.is-tearing{
+    overflow:visible;
+  }
+
+
+  .ticket-action{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    margin-top:10px;
+    padding:9px 13px;
+    border-radius:12px;
+    border:1px solid #ddd2f4;
+    background:#fff;
+    color:var(--lilac-deep);
+    font-size:12px;
+    font-weight:800;
+    text-decoration:none;
+    opacity:0;
+    transform:translateY(8px);
+    pointer-events:none;
+    transition:opacity .26s ease, transform .26s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+
+  .ticket-action:hover{
+    border-color:#cdbef0;
+    box-shadow:0 8px 18px rgba(87,66,137,.08);
+  }
+
+  .ticket.revealed .ticket-action{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+
+
+  @keyframes soldStampIn{
+    0%{
+      opacity:0;
+      transform:translate(-50%,-50%) rotate(-13deg) scale(1.8);
+      filter:blur(2px);
+    }
+    55%{
+      opacity:1;
+      transform:translate(-50%,-50%) rotate(-9deg) scale(.92);
+      filter:blur(0);
+    }
+    78%{
+      transform:translate(-50%,-50%) rotate(-9deg) scale(1.04);
+    }
+    100%{
+      opacity:1;
+      transform:translate(-50%,-50%) rotate(-9deg) scale(1);
+    }
+  }
+
+  @keyframes soldTicketImpact{
+    0%,100%{ transform:translateX(0) rotate(0deg); }
+    25%{ transform:translateX(-3px) rotate(-.18deg); }
+    50%{ transform:translateX(3px) rotate(.18deg); }
+    75%{ transform:translateX(-1px) rotate(-.08deg); }
+  }
+
+  @keyframes stampInkPulse{
+    0%{ opacity:.42; }
+    100%{ opacity:.13; }
+  }
+
+  .sold-stamp{
+    position:absolute;
+    left:68%;
+    top:50%;
+    z-index:8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:156px;
+    height:62px;
+    border:4px double rgba(163,77,77,.78);
+    border-radius:10px;
+    color:rgba(163,77,77,.86);
+    background:rgba(255,255,255,.22);
+    font-family:'Jua',sans-serif;
+    font-size:28px;
+    letter-spacing:.08em;
+    line-height:1;
+    opacity:0;
+    transform:translate(-50%,-50%) rotate(-9deg) scale(1.7);
+    pointer-events:none;
+    text-shadow:0 0 1px rgba(163,77,77,.26);
+    box-shadow:
+      inset 0 0 0 2px rgba(163,77,77,.08),
+      0 0 0 1px rgba(255,255,255,.35);
+  }
+
+  .sold-stamp::before,
+  .sold-stamp::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    background:rgba(163,77,77,.18);
+    pointer-events:none;
+  }
+
+  .sold-stamp::before{
+    width:6px;height:6px;
+    left:17px;bottom:9px;
+  }
+
+  .sold-stamp::after{
+    width:4px;height:4px;
+    right:20px;top:8px;
+  }
+
+  .ticket[data-recruitment="sold"]{
+    cursor:pointer;
+  }
+
+  .ticket.stamp-hit{
+    animation:soldTicketImpact .34s ease-out;
+  }
+
+  .ticket.stamp-hit .sold-stamp{
+    animation:soldStampIn .48s cubic-bezier(.2,.85,.22,1) forwards;
+  }
+
+  .ticket.stamp-hit::after{
+    animation:stampInkPulse .5s ease-out forwards;
+  }
+
+  @media (max-width:560px){
+    .sold-stamp{
+      left:62%;
+      width:124px;
+      height:52px;
+      font-size:22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *,
+    *::before,
+    *::after{
+      animation-duration:.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.001ms !important;
+      scroll-behavior:auto !important;
+    }
+
+    .ticket{
+      opacity:1;
+      transform:none !important;
+    }
+  }
+
+  @media (max-width:780px){
+    .stats{grid-template-columns:repeat(3,1fr)}
+    .control-row{grid-template-columns:1fr 1fr}
+    .search-wrap{grid-column:1/-1}
+  }
+
+  @media (max-width:560px){
+    body{padding:18px 10px 48px}
+    .hero{padding:22px 18px}
+    .stats{grid-template-columns:1fr}
+    .control-panel{top:8px}
+    .control-row{grid-template-columns:1fr}
+    .search-wrap{grid-column:auto}
+    .ticket{
+      grid-template-columns:118px 20px minmax(0,1fr);
+      min-height:122px;
+      border-radius:22px;
+    }
+    .ticket-main{
+      grid-template-columns:1fr;
+      padding:16px 16px 16px 18px;
+      gap:12px;
+    }
+    .status-side{
+      align-items:flex-start;
+    }
+    .event-title{font-size:15px}
+    .date{font-size:15px}
+    .date strong{font-size:21px}
+    .meta-row{
+      flex-direction:column;
+      align-items:flex-start;
+    }
+    .ticket[data-recruitment="sold"]::after{display:none}
   }
 </style>
-
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=13965"></script>
 </head>
 <body>
-<div class="wrap">
-
-  <header>
-    <div class="eyebrow">Hansaeka Event Support</div>
+<div class="app">
+  <section class="hero">
+    <div class="eyebrow">Hansaeka Event Support · Ticket Board</div>
     <h1>한세카 이벤트 <span>맞헬퍼</span> 모집 현황</h1>
-    
-    <div class="legend">
-      <span><i class="dot" style="background:#f4c95d"></i>OPEN</span>
-      <span><i class="dot" style="background:#c96b6b"></i>SOLD OUT</span>
+    <div class="stats">
+      <div class="stat">
+        <div class="label">TOTAL EVENTS</div>
+        <div class="value" id="statTotal">0</div>
+      </div>
+      <div class="stat">
+        <div class="label">OPEN</div>
+        <div class="value open" id="statOpen">0</div>
+      </div>
+      <div class="stat">
+        <div class="label">SOLD OUT</div>
+        <div class="value sold" id="statSold">0</div>
+      </div>
     </div>
-  
-<div class="notice">
-<strong>📢 안내사항</strong><br>
-✦ 신청해주신 <b>시프트 및 참여 정보는 외부에 절대 공유되지 않습니다.</b><br>
-✦ 문의 및 신청은 오픈채팅으로 부탁드립니다. 
-✦ 월드링크 3차 츠카사 챕터 문의 받지 않습니다.
-</div>
 
-  </header>
+    <div class="notice">
+      <strong>📢 안내사항</strong><br>
+      ✦ 신청해주신 <b>시프트 및 참여 정보는 외부에 절대 공유되지 않습니다.</b><br>
+      ✦ 문의 및 신청은 오픈채팅으로 부탁드립니다.<br>
+      ✦ 월드링크 3차 츠카사 챕터 문의 받지 않습니다.
+    </div>
+  </section>
 
-  <main id="list"></main>
+  <section class="control-panel" aria-label="검색 및 필터">
+    <div class="control-row">
+      <div class="search-wrap">
+        <input id="search" class="control" type="search" placeholder="이벤트명 검색..." autocomplete="off" />
+      </div>
+
+      <select id="statusFilter" class="control">
+        <option value="all">전체 상태</option>
+        <option value="open">OPEN</option>
+        <option value="sold">SOLD OUT</option>
+      </select>
+
+      <select id="yearFilter" class="control">
+        <option value="all">전체 연도</option>
+      </select>
+
+      <select id="sortFilter" class="control">
+        <option value="date-asc">빠른 일정순</option>
+        <option value="date-desc">늦은 일정순</option>
+        <option value="title-asc">이름순</option>
+      </select>
+    </div>
+
+    <div class="meta-row">
+      <span id="resultText">0개의 이벤트 표시 중</span>
+      <button id="resetButton" class="reset" type="button">필터 초기화</button>
+    </div>
+  </section>
+
+  <main>
+    <div id="list" class="timeline"></div>
+    <div id="empty" class="empty">
+      조건에 맞는 이벤트가 없어요 🥲<br />
+      검색어나 필터를 바꿔보세요.
+    </div>
+  </main>
 
   <footer>
-    이 페이지는 신청 현황 공유용이며, 헬퍼 개인정보는 별도로 관리돼요.<br>
-    문의 및 신청은 <a href="https://open.kakao.com/o/smuIXXmi" target="_blank">오픈채팅</a>으로 부탁드립니다 🩷
+    이 페이지는 신청 현황 공유용이며, 헬퍼 개인정보는 별도로 관리돼요.<br />
+    문의 및 신청은
+    <a href="https://open.kakao.com/o/smuIXXmi" target="_blank" rel="noopener noreferrer">오픈채팅</a>으로 부탁드립니다 🩷
   </footer>
-
 </div>
 
 <script>
-const events = [
-  ["2026-09-25","2026-09-28","Wishes in Bloom!",2],
-  ["2026-09-30","2026-10-09","Our Golden Days",2],
-  ["2026-10-11","2026-10-19","너와 잇는 Heart Beat",0],
-  ["2026-10-21","2026-10-29","교차하는 색은 그날 그대로",0],
-  ["2026-10-31","2026-11-08","Colors of Pure Sense",2],
-  ["2026-11-10","2026-11-17","초극의 프로타고니스타",0],
-  ["2026-11-20","2026-11-28","Overcome one's limits",2],
-  ["2026-11-30","2026-12-08","올려다본 밤하늘에, 별은 뒤섞여",2],
-  ["2026-12-10","2026-12-19","함께, 트루 루트를 목표로",0],
-  ["2026-12-21","2026-12-29","이 이야기는 희망을 싣고",0],
-  ["2026-12-31","2027-01-09","새해를 축복하는, 기원의 춤",2],
-  ["2027-01-11","2027-01-19","깨어나지 않는 환상을 노크하며",2],
-  ["2027-01-21","2027-01-29","GO ALL OUT",2],
-  ["2027-01-31","2027-02-08","분쇄하라! 언발렌타인의 복수",2],
-  ["2027-02-10","2027-02-17","Path made by faith",1],
-  ["2027-02-19","2027-02-26","CHANGE! 에무는 왕녀님?!",2],
-  ["2027-02-28","2027-03-08","악몽의 정원을 노래로 밝히며",0],
-  ["2027-03-10","2027-03-18","Open up new horizons",0],
-  ["2027-03-20","2027-03-28","Amid the Wavering Light",0],
-  ["2027-03-30","2027-04-07","저녁빛의 Inside Direction",2],
-  ["2027-04-09","2027-04-16","Show 'em what's up!",2],
-  ["2027-04-18","2027-04-28","약속의 Passerelle",2],
-  ["2027-04-30","2027-05-06","따뜻한 추억을 더듬어",0],
-  ["2027-05-08","2027-05-15","Stay solid, No fold",2],
-  ["2027-05-17","2027-05-29","Great Yell for Dreamers!",2],
-  ["2027-05-31","2027-06-06","가장 먼 끝으로 날아가는 너에게",0],
-  ["2027-06-08","2027-06-18","Into the New Light",0],
-  ["2027-06-30","2027-07-07","아이돌 하나사토 미노리 ~ 꿈의 최전선 ~",2],
-  ["2027-07-09","2027-07-17","바래지 않는 지금을, 물들여",0],
-  ["2027-07-19","2027-07-29","너의 곁, 너와 바라보는 내일",2],
-  ["2027-07-31","2027-08-07","Echo of a prayer",2],
-  ["2027-08-09","2027-08-15","Leap Beyond The Limits!",0],
-  ["2027-08-17","2027-08-27","Again And Again Ambition!",0],
-  ["2027-08-29","2027-09-04","Mix&Make Party Time!!",0],
-  ["2027-09-06","2027-09-12","After the Fire",2],
-  ["2027-09-14","2027-09-20","Drive to Dream!",0],
-  ["2027-09-25","2027-09-28","Connect to SEKAI!",0],
-  
-];
+(() => {
+  "use strict";
 
-const monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+  const RAW_EVENTS = [
+    ["2026-09-25","2026-09-28","Wishes in Bloom!",2],
+    ["2026-09-30","2026-10-09","Our Golden Days",2],
+    ["2026-10-11","2026-10-19","너와 잇는 Heart Beat",0],
+    ["2026-10-21","2026-10-29","교차하는 색은 그날 그대로",0],
+    ["2026-10-31","2026-11-08","Colors of Pure Sense",2],
+    ["2026-11-10","2026-11-17","초극의 프로타고니스타",0],
+    ["2026-11-20","2026-11-28","Overcome one's limits",2],
+    ["2026-11-30","2026-12-08","올려다본 밤하늘에, 별은 뒤섞여",2],
+    ["2026-12-10","2026-12-19","함께, 트루 루트를 목표로",0],
+    ["2026-12-21","2026-12-29","이 이야기는 희망을 싣고",0],
+    ["2026-12-31","2027-01-09","새해를 축복하는, 기원의 춤",2],
+    ["2027-01-11","2027-01-19","깨어나지 않는 환상을 노크하며",2],
+    ["2027-01-21","2027-01-29","GO ALL OUT",2],
+    ["2027-01-31","2027-02-08","분쇄하라! 언발렌타인의 복수",2],
+    ["2027-02-10","2027-02-17","Path made by faith",1],
+    ["2027-02-19","2027-02-26","CHANGE! 에무는 왕녀님?!",2],
+    ["2027-02-28","2027-03-08","악몽의 정원을 노래로 밝히며",0],
+    ["2027-03-10","2027-03-18","Open up new horizons",0],
+    ["2027-03-20","2027-03-28","Amid the Wavering Light",0],
+    ["2027-03-30","2027-04-07","저녁빛의 Inside Direction",2],
+    ["2027-04-09","2027-04-16","Show 'em what's up!",2],
+    ["2027-04-18","2027-04-28","약속의 Passerelle",2],
+    ["2027-04-30","2027-05-06","따뜻한 추억을 더듬어",0],
+    ["2027-05-08","2027-05-15","Stay solid, No fold",2],
+    ["2027-05-17","2027-05-29","Great Yell for Dreamers!",2],
+    ["2027-05-31","2027-06-06","가장 먼 끝으로 날아가는 너에게",0],
+    ["2027-06-08","2027-06-18","Into the New Light",0],
+    ["2027-06-30","2027-07-07","아이돌 하나사토 미노리 ~ 꿈의 최전선 ~",2],
+    ["2027-07-09","2027-07-17","바래지 않는 지금을, 물들여",0],
+    ["2027-07-19","2027-07-29","너의 곁, 너와 바라보는 내일",2],
+    ["2027-07-31","2027-08-07","Echo of a prayer",2],
+    ["2027-08-09","2027-08-15","Leap Beyond The Limits!",0],
+    ["2027-08-17","2027-08-27","Again And Again Ambition!",0],
+    ["2027-08-29","2027-09-04","Mix&Make Party Time!!",0],
+    ["2027-09-06","2027-09-12","After the Fire",2],
+    ["2027-09-14","2027-09-20","Drive to Dream!",0],
+    ["2027-09-25","2027-09-28","Connect to SEKAI!",0]
+  ];
 
-function fmt(d){
-  const [y,m,day] = d.split("-");
-  return { top: `${m}.${day}`, year: y };
-}
+  const AppConfig = Object.freeze({
+    locale: "ko-KR",
+    timeZone: "Asia/Seoul"
+  });
 
-function badge(filled){
-  if(filled >= 2) return ['sold','SOLD OUT'];
-  return ['open','OPEN'];
-}
+  class EventEntity {
+    constructor(id, [startAt, endAt, title, filled]) {
+      this.id = id;
+      this.title = title;
+      this.startAt = new Date(`${startAt}T00:00:00+09:00`);
+      this.endAt = new Date(`${endAt}T23:59:59+09:00`);
+      this.filled = filled;
+    }
 
-const list = document.getElementById('list');
+    get year() {
+      return String(this.startAt.getFullYear());
+    }
 
-let currentYear='';
-events.forEach((ev, i) => {
-  const [start, end, title, filled] = ev;
-  const s = fmt(start), e = fmt(end);
-  const [cls, label] = badge(filled);
-  if(currentYear!==s.year){
-    currentYear=s.year;
-    const y=document.createElement('div');
-    y.style.cssText='text-align:center;font-family:Jua,sans-serif;font-size:30px;color:var(--lilac-deep);margin:38px 0 18px;';
-    y.innerHTML=`✦ ${currentYear} ✦`;
-    list.appendChild(y);
+    get recruitmentStatus() {
+      return this.filled >= 2 ? "sold" : "open";
+    }
+
+    get temporalStatus() {
+      const now = new Date();
+      if (now < this.startAt) return "upcoming";
+      if (now > this.endAt) return "ended";
+      return "ongoing";
+    }
+
+    get dDay() {
+      const now = new Date();
+      return Math.ceil((this.startAt - now) / 86400000);
+    }
   }
-  const ticket = document.createElement('div');
-  ticket.className = cls === 'sold' ? 'ticket soldout' : 'ticket';
-  ticket.innerHTML = `
-    <div class="stub">
-      <div class="no">NO. ${String(i+1).padStart(2,'0')}</div>
-      <div class="date">${s.top}<small>~ ${e.top}</small></div>
-    </div>
-    <div class="perforation"></div>
-    <div class="body">
-      <div class="title">${title}</div>
-      <div class="badge ${cls}">${label}</div>
-    </div>
-  `;
-  list.appendChild(ticket);
-});
+
+  class EventRepository {
+    constructor(source) {
+      this.items = source.map((item, index) => new EventEntity(index + 1, item));
+    }
+
+    all() {
+      return [...this.items];
+    }
+
+    years() {
+      return [...new Set(this.items.map(item => item.year))].sort();
+    }
+
+    statistics() {
+      return this.items.reduce((acc, event) => {
+        acc.total++;
+        acc[event.recruitmentStatus]++;
+        return acc;
+      }, { total: 0, open: 0, sold: 0 });
+    }
+  }
+
+  class UrlState {
+    static read() {
+      const params = new URLSearchParams(location.search);
+      return {
+        q: params.get("q") ?? "",
+        status: params.get("status") ?? "all",
+        year: params.get("year") ?? "all",
+        sort: params.get("sort") ?? "date-asc"
+      };
+    }
+
+    static write(state) {
+      const params = new URLSearchParams();
+      if (state.q) params.set("q", state.q);
+      if (state.status !== "all") params.set("status", state.status);
+      if (state.year !== "all") params.set("year", state.year);
+      if (state.sort !== "date-asc") params.set("sort", state.sort);
+
+      const qs = params.toString();
+      history.replaceState(null, "", `${location.pathname}${qs ? `?${qs}` : ""}${location.hash}`);
+    }
+  }
+
+  class EventService {
+    constructor(repository) {
+      this.repository = repository;
+    }
+
+    query(state) {
+      const keyword = state.q.trim().toLocaleLowerCase(AppConfig.locale);
+
+      const filtered = this.repository.all().filter(event => {
+        const matchesSearch = !keyword || event.title.toLocaleLowerCase(AppConfig.locale).includes(keyword);
+        const matchesStatus = state.status === "all" || event.recruitmentStatus === state.status;
+        const matchesYear = state.year === "all" || event.year === state.year;
+        return matchesSearch && matchesStatus && matchesYear;
+      });
+
+      filtered.sort((a, b) => {
+        switch (state.sort) {
+          case "date-desc":
+            return b.startAt - a.startAt;
+          case "title-asc":
+            return a.title.localeCompare(b.title, AppConfig.locale);
+          case "date-asc":
+          default:
+            return a.startAt - b.startAt;
+        }
+      });
+
+      return filtered;
+    }
+  }
+
+  class View {
+    constructor() {
+      this.list = document.getElementById("list");
+      this.empty = document.getElementById("empty");
+      this.resultText = document.getElementById("resultText");
+      this.search = document.getElementById("search");
+      this.statusFilter = document.getElementById("statusFilter");
+      this.yearFilter = document.getElementById("yearFilter");
+      this.sortFilter = document.getElementById("sortFilter");
+      this.resetButton = document.getElementById("resetButton");
+    }
+
+    setStatistics(stats) {
+      document.getElementById("statTotal").textContent = stats.total;
+      document.getElementById("statOpen").textContent = stats.open;
+      document.getElementById("statSold").textContent = stats.sold;
+    }
+
+    setYears(years) {
+      const fragment = document.createDocumentFragment();
+      years.forEach(year => {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = `${year}년`;
+        fragment.appendChild(option);
+      });
+      this.yearFilter.appendChild(fragment);
+    }
+
+    applyState(state) {
+      this.search.value = state.q;
+      this.statusFilter.value = state.status;
+      this.yearFilter.value = state.year;
+      this.sortFilter.value = state.sort;
+    }
+
+    bind(onChange, onReset) {
+      const controls = [this.search, this.statusFilter, this.yearFilter, this.sortFilter];
+      controls.forEach(control => {
+        control.addEventListener(control === this.search ? "input" : "change", onChange);
+      });
+      this.resetButton.addEventListener("click", onReset);
+    }
+
+    readState() {
+      return {
+        q: this.search.value,
+        status: this.statusFilter.value,
+        year: this.yearFilter.value,
+        sort: this.sortFilter.value
+      };
+    }
+
+    render(events) {
+      this.list.replaceChildren();
+
+      if (!events.length) {
+        this.empty.style.display = "block";
+        this.resultText.textContent = "0개의 이벤트 표시 중";
+        return;
+      }
+
+      this.empty.style.display = "none";
+      this.resultText.textContent = `${events.length}개의 이벤트 표시 중`;
+
+      const fragment = document.createDocumentFragment();
+      let currentYear = null;
+
+      events.forEach(event => {
+        if (currentYear !== event.year) {
+          currentYear = event.year;
+          fragment.appendChild(this.createYearHeading(currentYear));
+        }
+        fragment.appendChild(this.createTicket(event));
+      });
+
+      this.list.appendChild(fragment);
+    }
+
+    createYearHeading(year) {
+      const node = document.createElement("div");
+      node.className = "year-heading";
+      node.textContent = year;
+      return node;
+    }
+
+    createTicket(event) {
+      const article = document.createElement("article");
+      article.className = "ticket";
+      article.dataset.recruitment = event.recruitmentStatus;
+      article.style.setProperty("--delay", `${Math.min(event.id * 28, 420)}ms`);
+
+      article.innerHTML = `
+        <div class="stub">
+          <div class="event-no">NO. ${String(event.id).padStart(2, "0")}</div>
+          <div class="date">
+            ${this.formatDate(event.startAt, true)}
+            <strong>${this.formatDate(event.startAt, false)}</strong>
+            <small>~ ${this.formatDate(event.endAt, true)} ${this.formatDate(event.endAt, false)}</small>
+          </div>
+        </div>
+
+        <div class="perforation" aria-hidden="true"></div>
+
+        <div class="sold-stamp" aria-hidden="true">SOLD OUT</div>
+
+        <div class="ticket-main">
+          <div>
+            <h2 class="event-title">${this.escapeHTML(event.title)}</h2>
+            <div class="chips">
+              ${this.temporalChip(event)}
+              <span class="chip">${event.year}</span>
+              <span class="chip stubby">EVENT BOARD</span>
+            </div>
+            <div class="serial">EVENT PASS · ${event.year} · NO.${String(event.id).padStart(3, "0")}</div>
+            <a class="ticket-action"
+               href="https://open.kakao.com/o/smuIXXmi"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="오픈채팅으로 신청 및 문의하기">
+              신청 / 문의하기 →
+            </a>
+          </div>
+
+          <div class="status-side">
+            <div class="badge ${event.recruitmentStatus}">${this.statusLabel(event.recruitmentStatus)}</div>
+            <div class="status-note">${this.statusText(event.recruitmentStatus)}</div>
+          </div>
+        </div>
+      `;
+
+      return article;
+    }
+
+    temporalChip(event) {
+      if (event.temporalStatus === "ongoing") {
+        return `<span class="chip now">NOW · 진행 중</span>`;
+      }
+      if (event.temporalStatus === "ended") {
+        return `<span class="chip ended">ENDED</span>`;
+      }
+
+      const days = Math.max(0, event.dDay);
+      return `<span class="chip dday">${days === 0 ? "D-DAY" : `D-${days}`}</span>`;
+    }
+
+    statusLabel(status) {
+      return status === "sold" ? "SOLD OUT" : "OPEN";
+    }
+
+    statusText(status) {
+      return status === "sold" ? "현재 모집이 마감되었어요." : "현재 신청 가능한 상태예요.";
+    }
+
+    formatDate(date, monthOnly) {
+      const parts = new Intl.DateTimeFormat(AppConfig.locale, {
+        timeZone: AppConfig.timeZone,
+        month: "2-digit",
+        day: "2-digit"
+      }).formatToParts(date);
+
+      const month = parts.find(p => p.type === "month")?.value ?? "";
+      const day = parts.find(p => p.type === "day")?.value ?? "";
+      return monthOnly ? month : day;
+    }
+
+    escapeHTML(value) {
+      const node = document.createElement("div");
+      node.textContent = value;
+      return node.innerHTML;
+    }
+  }
+
+  class EventApplication {
+    constructor() {
+      this.repository = new EventRepository(RAW_EVENTS);
+      this.service = new EventService(this.repository);
+      this.view = new View();
+      this.state = UrlState.read();
+    }
+
+    bootstrap() {
+      this.view.setStatistics(this.repository.statistics());
+      this.view.setYears(this.repository.years());
+
+      const validYears = new Set(["all", ...this.repository.years()]);
+      if (!validYears.has(this.state.year)) this.state.year = "all";
+
+      this.view.applyState(this.state);
+      this.view.bind(
+        () => this.syncFromView(),
+        () => this.reset()
+      );
+      this.render();
+    }
+
+    syncFromView() {
+      this.state = this.view.readState();
+      UrlState.write(this.state);
+      this.render();
+    }
+
+    reset() {
+      this.state = { q: "", status: "all", year: "all", sort: "date-asc" };
+      this.view.applyState(this.state);
+      UrlState.write(this.state);
+      this.render();
+    }
+
+    render() {
+      this.view.render(this.service.query(this.state));
+    }
+  }
+
+
+  const app = new EventApplication();
+  app.bootstrap();
+
+  document.addEventListener("click", event => {
+    if (event.target.closest(".ticket-action")) return;
+
+    const ticket = event.target.closest('.ticket[data-recruitment="open"]');
+    if (!ticket || ticket.classList.contains("is-tearing")) return;
+
+    if (ticket.classList.contains("revealed")) {
+      ticket.classList.remove("revealed");
+      return;
+    }
+
+    ticket.classList.add("is-tearing");
+
+    window.setTimeout(() => {
+      ticket.classList.add("revealed");
+    }, 430);
+
+    window.setTimeout(() => {
+      ticket.classList.remove("is-tearing");
+    }, 1100);
+  });
+
+
+  document.addEventListener("click", event => {
+    if (event.target.closest(".ticket-action")) return;
+
+    const soldTicket = event.target.closest('.ticket[data-recruitment="sold"]');
+    if (!soldTicket) return;
+
+    soldTicket.classList.remove("stamp-hit");
+    void soldTicket.offsetWidth;
+    soldTicket.classList.add("stamp-hit");
+
+    window.setTimeout(() => {
+      soldTicket.classList.remove("stamp-hit");
+    }, 1000);
+  });
+
+})();
 </script>
 </body>
 </html>
