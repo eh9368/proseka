@@ -1,801 +1,955 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#8b6df6">
 <title>한세카 이벤트 맞헬퍼 모집 현황</title>
-<meta name="theme-color" content="#8b6df6" />
 <style>
-:root{
-    --bg:#f7f4fb;
-    --bg2:#f1ebfa;
-    --paper:#ffffff;
-    --ink:#312b42;
-    --ink-soft:#7c738e;
-    --line:#e7def5;
-    --lilac:#aa91fb;
-    --lilac-deep:#7a5be8;
-    --violet:#5e42d3;
-    --gold-soft:#fff3cf;
-    --gold-ink:#9d741d;
-    --rose-soft:#f7dddd;
-    --rose-ink:#a34d4d;
-    --green-soft:#def1e5;
-    --green-ink:#4f7e67;
-    --shadow:0 18px 46px rgba(87,66,137,.10);
-    --shadow-soft:0 10px 24px rgba(87,66,137,.08);
-  }
+:root {
+  --bg:#f7f4fb;
+  --bg2:#f1ebfa;
+  --paper:#fff;
+  --ink:#312b42;
+  --ink-soft:#7c738e;
+  --line:#e7def5;
+  --lilac:#aa91fb;
+  --lilac-deep:#7a5be8;
+  --violet:#5e42d3;
+  --gold-soft:#fff3cf;
+  --gold-ink:#9d741d;
+  --rose-soft:#f7dddd;
+  --rose-ink:#a34d4d;
+  --green-soft:#def1e5;
+  --green-ink:#4f7e67;
+  --shadow:0 18px 46px rgba(87,66,137,.10);
+  --shadow-soft:0 10px 24px rgba(87,66,137,.08);
+}
 
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;
-    min-height:100vh;
-    padding:30px 16px 72px;
-    color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-    background:
-      radial-gradient(circle at 8% 10%, rgba(170,145,251,.15), transparent 28%),
-      radial-gradient(circle at 92% 15%, rgba(233,197,107,.12), transparent 26%),
-      linear-gradient(180deg,var(--bg) 0%, var(--bg2) 100%);
-  }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 
-  button,input,select{font:inherit}
+body {
+  margin:0;
+  min-height:100vh;
+  padding:30px 16px 72px;
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,
+    'Segoe UI','Apple SD Gothic Neo',
+    'Noto Sans KR','Malgun Gothic',sans-serif;
+  background:
+    radial-gradient(circle at 8% 10%,
+      rgba(170,145,251,.15),transparent 28%),
+    radial-gradient(circle at 92% 15%,
+      rgba(233,197,107,.12),transparent 26%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+}
 
-  .app{
-    width:min(980px,100%);
-    margin:0 auto;
-  }
+button,input,select { font:inherit; }
 
-  .hero{
-    position:relative;
-    overflow:hidden;
-    padding:28px 28px 24px;
-    border-radius:28px;
-    border:1px solid #e7ddf7;
-    background:linear-gradient(145deg, rgba(255,255,255,.94), rgba(251,248,255,.85));
-    box-shadow:var(--shadow);
-    backdrop-filter:blur(14px);
-  }
+.app {
+  width:min(980px,100%);
+  margin:0 auto;
+}
 
-  .hero::before,
-  .hero::after{
-    content:"";
-    position:absolute;
-    border-radius:50%;
-    pointer-events:none;
-  }
-  .hero::before{
-    width:220px;height:220px;
-    right:-90px; top:-100px;
-    background:radial-gradient(circle, rgba(122,91,232,.14), transparent 70%);
-  }
-  .hero::after{
-    width:160px;height:160px;
-    left:-70px; bottom:-70px;
-    background:radial-gradient(circle, rgba(233,197,107,.10), transparent 70%);
-  }
+/* 상단 소개 */
 
-  .eyebrow{
-    font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:.32em;
-    color:var(--lilac-deep);
-    margin-bottom:10px;
-  }
+.hero {
+  position:relative;
+  overflow:hidden;
+  padding:28px 28px 24px;
+  border-radius:28px;
+  border:1px solid #e7ddf7;
+  background:linear-gradient(
+    145deg,rgba(255,255,255,.94),
+    rgba(251,248,255,.85)
+  );
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(14px);
+}
 
-  h1{
-    margin:0;
-    font-family:'Arial Rounded MT Bold','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-    font-size:clamp(28px,4vw,42px);
-    font-weight:400;
-    line-height:1.18;
-    letter-spacing:-.02em;
-  }
+.hero::before,
+.hero::after {
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+}
 
-  h1 span{color:var(--lilac-deep)}
+.hero::before {
+  width:220px;
+  height:220px;
+  right:-90px;
+  top:-100px;
+  background:radial-gradient(
+    circle,rgba(122,91,232,.14),transparent 70%
+  );
+}
 
-  .sub{
-    margin:12px 0 0;
-    color:var(--ink-soft);
-    font-size:14px;
-    line-height:1.75;
-  }
+.hero::after {
+  width:160px;
+  height:160px;
+  left:-70px;
+  bottom:-70px;
+  background:radial-gradient(
+    circle,rgba(233,197,107,.10),transparent 70%
+  );
+}
 
-  .stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:22px;
-  }
+.eyebrow {
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.32em;
+  color:var(--lilac-deep);
+  margin-bottom:10px;
+}
 
-  .stat{
-    padding:15px 16px;
-    border-radius:18px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.80);
-    box-shadow:0 8px 18px rgba(87,66,137,.04);
-  }
+h1 {
+  margin:0;
+  font-family:'Arial Rounded MT Bold',
+    'Apple SD Gothic Neo','Noto Sans KR',
+    'Malgun Gothic',sans-serif;
+  font-size:clamp(28px,4vw,42px);
+  font-weight:400;
+  line-height:1.18;
+  letter-spacing:-.02em;
+}
 
-  .stat .label{
-    font-size:11px;
-    color:var(--ink-soft);
-    letter-spacing:.05em;
-    margin-bottom:7px;
-  }
+h1 span { color:var(--lilac-deep); }
 
-  .stat .value{
-    font-family:'Arial Rounded MT Bold','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-    font-size:27px;
-    line-height:1;
-  }
+.stats {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:22px;
+}
 
-  .stat .value.open{color:var(--gold-ink)}
-  .stat .value.sold{color:var(--rose-ink)}
+.stat {
+  padding:15px 16px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.80);
+  box-shadow:0 8px 18px rgba(87,66,137,.04);
+}
 
-  .notice{
-    margin-top:16px;
-    padding:14px 16px;
-    border-radius:16px;
-    border:1px solid var(--line);
-    border-left:5px solid var(--lilac-deep);
-    background:rgba(255,255,255,.80);
-    color:var(--ink-soft);
-    line-height:1.8;
-    font-size:13.5px;
-  }
+.stat .label {
+  font-size:11px;
+  color:var(--ink-soft);
+  letter-spacing:.05em;
+  margin-bottom:7px;
+}
 
-  .control-panel{
-    position:sticky;
-    top:12px;
-    z-index:10;
-    margin:20px 0 18px;
-    padding:14px;
-    border:1px solid #e7ddf7;
-    border-radius:20px;
-    background:rgba(255,255,255,.90);
-    box-shadow:var(--shadow-soft);
-    backdrop-filter:blur(14px);
-  }
+.stat .value {
+  font-family:'Arial Rounded MT Bold',
+    'Apple SD Gothic Neo','Noto Sans KR',
+    'Malgun Gothic',sans-serif;
+  font-size:27px;
+  line-height:1;
+}
 
-  .control-row{
-    display:grid;
-    grid-template-columns:minmax(0,1.7fr) repeat(3,minmax(120px,.52fr));
-    gap:10px;
-  }
+.stat .value.open { color:var(--gold-ink); }
+.stat .value.sold { color:var(--rose-ink); }
 
-  .search-wrap{position:relative}
-  .search-wrap::before{
-    content:"⌕";
-    position:absolute;
-    top:50%;
-    left:14px;
-    transform:translateY(-50%);
-    color:var(--ink-soft);
-    font-size:20px;
-  }
+.notice {
+  margin-top:16px;
+  padding:14px 16px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  border-left:5px solid var(--lilac-deep);
+  background:rgba(255,255,255,.80);
+  color:var(--ink-soft);
+  line-height:1.8;
+  font-size:13.5px;
+}
 
-  .control{
-    width:100%;
-    height:44px;
-    border:1px solid var(--line);
-    border-radius:13px;
-    background:#fff;
-    color:var(--ink);
-    outline:none;
-    transition:.18s ease;
-  }
+/* 검색 및 필터 */
+/* sticky 제거: 스크롤 시 따라오지 않음 */
 
-  input.control{padding:0 14px 0 42px}
-  select.control{padding:0 34px 0 12px}
+.control-panel {
+  position:static;
+  margin:20px 0 18px;
+  padding:14px;
+  border:1px solid #e7ddf7;
+  border-radius:20px;
+  background:rgba(255,255,255,.90);
+  box-shadow:var(--shadow-soft);
+  backdrop-filter:blur(14px);
+}
 
-  .control:focus{
-    border-color:rgba(122,91,232,.55);
-    box-shadow:0 0 0 4px rgba(122,91,232,.08);
-  }
+.control-row {
+  display:grid;
+  grid-template-columns:
+    minmax(0,1.7fr) repeat(3,minmax(120px,.52fr));
+  gap:10px;
+}
 
-  .meta-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    margin-top:10px;
-    color:var(--ink-soft);
-    font-size:12px;
-  }
+.search-wrap { position:relative; }
 
-  .reset{
-    background:transparent;
-    border:0;
-    color:var(--lilac-deep);
-    font-weight:800;
-    cursor:pointer;
-  }
+.search-wrap::before {
+  content:"⌕";
+  position:absolute;
+  top:50%;
+  left:14px;
+  transform:translateY(-50%);
+  color:var(--ink-soft);
+  font-size:20px;
+  pointer-events:none;
+}
 
-  .timeline{
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-  }
+.control {
+  width:100%;
+  min-width:0;
+  height:44px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#fff;
+  color:var(--ink);
+  outline:none;
+  transition:.18s ease;
+}
 
-  .year-heading{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin:18px 4px 2px;
-    font-family:'Arial Rounded MT Bold','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-    color:var(--lilac-deep);
-    font-size:26px;
-  }
+input.control { padding:0 14px 0 42px; }
+select.control { padding:0 30px 0 12px; }
 
-  .year-heading::before,
-  .year-heading::after{
-    content:"";
-    flex:1;
-    height:1px;
-    background:linear-gradient(90deg, transparent, var(--line), transparent);
-  }
+.control:focus {
+  border-color:rgba(122,91,232,.55);
+  box-shadow:0 0 0 4px rgba(122,91,232,.08);
+}
 
-  .ticket{
-    position:relative;
-    display:grid;
-    grid-template-columns:146px 26px minmax(0,1fr);
-    min-height:132px;
-    border-radius:26px;
-    background:linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.90));
-    border:1px solid #e5daf7;
-    box-shadow:var(--shadow-soft);
-    overflow:hidden;
-    isolation:isolate;
-    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  }
+.meta-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+  color:var(--ink-soft);
+  font-size:12px;
+}
 
-  .ticket:hover{
-    transform:translateY(-2px);
-    box-shadow:0 20px 38px rgba(87,66,137,.11);
-    border-color:#ddcff3;
-  }
+.reset {
+  background:transparent;
+  border:0;
+  color:var(--lilac-deep);
+  font-weight:800;
+  cursor:pointer;
+}
 
-  .ticket::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(120deg, rgba(255,255,255,.35), transparent 18%),
-      radial-gradient(circle at 85% 75%, rgba(234,208,138,.10), transparent 20%);
-    pointer-events:none;
-    z-index:0;
-  }
+/* 이벤트 목록 */
 
-  .stub{
-    position:relative;
-    z-index:1;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:18px 14px;
-    text-align:center;
-    color:#fff;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0) 24%),
-      linear-gradient(160deg, var(--lilac) 0%, var(--violet) 100%);
-  }
+.timeline {
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
 
-  .stub::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(120deg, rgba(255,255,255,.18), transparent 34%);
-    pointer-events:none;
-  }
+.year-heading {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:18px 4px 2px;
+  font-family:'Arial Rounded MT Bold',
+    'Apple SD Gothic Neo','Noto Sans KR',
+    'Malgun Gothic',sans-serif;
+  color:var(--lilac-deep);
+  font-size:26px;
+}
 
-  .perforation{
-    position:relative;
-    z-index:1;
-    background:
-      linear-gradient(180deg, rgba(245,241,252,.96), rgba(255,255,255,.96));
-    border-left:1px solid #ede5f9;
-    border-right:1px solid #ede5f9;
-  }
+.year-heading::before,
+.year-heading::after {
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(
+    90deg,transparent,var(--line),transparent
+  );
+}
 
-  .perforation::before{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:10px;
-    bottom:10px;
-    transform:translateX(-50%);
-    border-left:2px dashed rgba(122,91,232,.22);
-  }
+/* 티켓 디자인 */
 
-  .ticket-main{
-    position:relative;
-    z-index:1;
-    display:grid;
-    grid-template-columns:minmax(0,1fr) auto;
-    align-items:center;
-    gap:18px;
-    padding:20px 22px 20px 24px;
-  }
+.ticket {
+  position:relative;
+  display:grid;
+  grid-template-columns:146px 26px minmax(0,1fr);
+  min-height:132px;
+  border-radius:26px;
+  background:linear-gradient(
+    180deg,rgba(255,255,255,.94),
+    rgba(255,255,255,.90)
+  );
+  border:1px solid #e5daf7;
+  box-shadow:var(--shadow-soft);
+  overflow:hidden;
+  isolation:isolate;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease;
+}
 
-  .event-no{
-    font-size:12px;
-    letter-spacing:.12em;
-    opacity:.78;
-    margin-bottom:6px;
-  }
+.ticket:hover {
+  transform:translateY(-4px) scale(1.004);
+  box-shadow:0 20px 38px rgba(87,66,137,.11);
+  border-color:#ddcff3;
+}
 
-  .date{
-    font-family:'Arial Rounded MT Bold','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-    font-size:18px;
-    line-height:1.18;
-  }
+.ticket::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      120deg,rgba(255,255,255,.35),transparent 18%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(234,208,138,.10),transparent 20%
+    );
+  pointer-events:none;
+  z-index:0;
+}
 
-  .date strong{
-    display:block;
-    font-size:26px;
-    margin:4px 0;
-  }
+.stub {
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:18px 14px;
+  text-align:center;
+  color:#fff;
+  background:
+    linear-gradient(
+      180deg,rgba(255,255,255,.12),
+      rgba(255,255,255,0) 24%
+    ),
+    linear-gradient(
+      160deg,var(--lilac),var(--violet)
+    );
+}
 
-  .date small{
-    display:block;
-    margin-top:4px;
-    font-size:11px;
-    opacity:.88;
-  }
+.stub::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,rgba(255,255,255,.18),transparent 34%
+  );
+  pointer-events:none;
+}
 
-  .event-title{
-    margin:0 0 12px;
-    font-size:18px;
-    line-height:1.42;
-    font-weight:800;
-    letter-spacing:-.01em;
-    word-break:keep-all;
-  }
+.perforation {
+  position:relative;
+  z-index:1;
+  background:linear-gradient(
+    180deg,rgba(245,241,252,.96),
+    rgba(255,255,255,.96)
+  );
+  border-left:1px solid #ede5f9;
+  border-right:1px solid #ede5f9;
+}
 
-  .chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-  }
+.perforation::before {
+  content:"";
+  position:absolute;
+  left:50%;
+  top:10px;
+  bottom:10px;
+  transform:translateX(-50%);
+  border-left:2px dashed rgba(122,91,232,.22);
+}
 
-  .chip{
-    display:inline-flex;
-    align-items:center;
-    min-height:30px;
-    padding:6px 12px;
-    border-radius:999px;
-    border:1px solid #ddd2f4;
-    background:#faf8fd;
-    color:var(--ink-soft);
-    font-size:12px;
-    font-weight:800;
-  }
+.ticket-main {
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:18px;
+  padding:20px 22px 20px 24px;
+}
 
-  .chip.dday{
-    background:#f2edff;
-    color:#6950d8;
-  }
+.event-no {
+  font-size:12px;
+  letter-spacing:.12em;
+  opacity:.78;
+  margin-bottom:6px;
+}
 
-  .chip.now{
-    background:var(--green-soft);
-    color:var(--green-ink);
-    border-color:#cfe7dc;
-  }
+.date {
+  font-family:'Arial Rounded MT Bold',
+    'Apple SD Gothic Neo','Noto Sans KR',
+    'Malgun Gothic',sans-serif;
+  font-size:18px;
+  line-height:1.18;
+}
 
-  .chip.ended{
-    background:#f1eff5;
-    color:#8a8295;
-  }
+.date strong {
+  display:block;
+  font-size:26px;
+  margin:4px 0;
+}
 
-  .chip.stubby{
-    background:#fff;
-    color:var(--lilac-deep);
-  }
+.date small {
+  display:block;
+  margin-top:4px;
+  font-size:11px;
+  opacity:.88;
+}
 
-  .status-side{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
-    gap:10px;
-  }
+.event-title {
+  margin:0 0 12px;
+  font-size:18px;
+  line-height:1.42;
+  font-weight:800;
+  letter-spacing:-.01em;
+  word-break:keep-all;
+}
 
-  .badge{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-width:92px;
-    min-height:40px;
-    padding:8px 16px;
-    border-radius:999px;
-    font-family:'Arial Rounded MT Bold','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-    font-size:13px;
-    letter-spacing:.02em;
-    white-space:nowrap;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.45);
-  }
+.chips {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
 
-  .badge.open{
-    background:var(--gold-soft);
-    color:var(--gold-ink);
-  }
+.chip {
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid #ddd2f4;
+  background:#faf8fd;
+  color:var(--ink-soft);
+  font-size:12px;
+  font-weight:800;
+}
 
-  .badge.sold{
-    background:var(--rose-soft);
-    color:var(--rose-ink);
-  }
+.chip.dday {
+  background:#f2edff;
+  color:#6950d8;
+}
 
-  .status-note{
-    font-size:11.5px;
-    font-weight:700;
-    color:var(--ink-soft);
-    line-height:1.5;
-    text-align:right;
-  }
+.chip.now {
+  background:var(--green-soft);
+  color:var(--green-ink);
+  border-color:#cfe7dc;
+}
 
-  .serial{
-    margin-top:10px;
-    font-size:10.5px;
-    letter-spacing:.14em;
-    color:#9b90b0;
-  }
-  .ticket[data-recruitment="sold"]{
-    opacity:.88;
-  }
+.chip.ended {
+  background:#f1eff5;
+  color:#8a8295;
+}
 
-  .empty{
-    display:none;
-    padding:46px 20px;
-    text-align:center;
-    border:1px dashed #d9cdee;
-    border-radius:20px;
-    background:rgba(255,255,255,.70);
-    color:var(--ink-soft);
-  }
+.chip.stubby {
+  background:#fff;
+  color:var(--lilac-deep);
+}
 
-  footer{
-    margin-top:30px;
-    text-align:center;
-    color:var(--ink-soft);
-    font-size:12.5px;
-    line-height:1.8;
-  }
+.status-side {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:10px;
+}
 
-  footer a{
-    color:var(--lilac-deep);
-    font-weight:800;
-    text-decoration:none;
-  }
+.badge {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:92px;
+  min-height:40px;
+  padding:8px 16px;
+  border-radius:999px;
+  font-family:'Arial Rounded MT Bold',
+    'Apple SD Gothic Neo','Noto Sans KR',
+    'Malgun Gothic',sans-serif;
+  font-size:13px;
+  letter-spacing:.02em;
+  white-space:nowrap;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45);
+}
 
+.badge.open {
+  background:var(--gold-soft);
+  color:var(--gold-ink);
+}
 
-  @keyframes ticketEnter{
-    from{
-      opacity:0;
-      transform:translateY(14px) scale(.992);
-    }
-    to{
-      opacity:1;
-      transform:translateY(0) scale(1);
-    }
-  }
+.badge.sold {
+  background:var(--rose-soft);
+  color:var(--rose-ink);
+}
 
-  @keyframes badgePop{
-    0%{
-      opacity:0;
-      transform:scale(.86);
-    }
-    75%{
-      opacity:1;
-      transform:scale(1.04);
-    }
-    100%{
-      opacity:1;
-      transform:scale(1);
-    }
-  }
+.status-note {
+  font-size:11.5px;
+  font-weight:700;
+  color:var(--ink-soft);
+  line-height:1.5;
+  text-align:right;
+}
 
-  @keyframes yearFade{
-    from{
-      opacity:0;
-      transform:translateY(8px);
-    }
-    to{
-      opacity:1;
-      transform:translateY(0);
-    }
-  }
+.serial {
+  margin-top:10px;
+  font-size:10.5px;
+  letter-spacing:.14em;
+  color:#9b90b0;
+}
 
-  .ticket{
+.ticket[data-recruitment="sold"] {
+  opacity:.88;
+  cursor:pointer;
+}
+
+.empty {
+  display:none;
+  padding:46px 20px;
+  text-align:center;
+  border:1px dashed #d9cdee;
+  border-radius:20px;
+  background:rgba(255,255,255,.70);
+  color:var(--ink-soft);
+}
+
+footer {
+  margin-top:30px;
+  text-align:center;
+  color:var(--ink-soft);
+  font-size:12.5px;
+  line-height:1.8;
+}
+
+footer a {
+  color:var(--lilac-deep);
+  font-weight:800;
+  text-decoration:none;
+}
+
+/* 입장 애니메이션 */
+
+@keyframes ticketEnter {
+  from {
     opacity:0;
-    animation:ticketEnter .46s cubic-bezier(.2,.75,.2,1) forwards;
-    animation-delay:var(--delay,0ms);
+    transform:translateY(14px) scale(.992);
   }
-
-  .ticket .badge{
-    animation:badgePop .34s ease-out both;
-    animation-delay:calc(var(--delay,0ms) + 110ms);
+  to {
+    opacity:1;
+    transform:translateY(0) scale(1);
   }
+}
 
-  .year-heading{
-    animation:yearFade .35s ease-out both;
+@keyframes badgePop {
+  0% {
+    opacity:0;
+    transform:scale(.86);
   }
-
-  .ticket:hover{
-    transform:translateY(-4px) scale(1.004);
+  75% {
+    opacity:1;
+    transform:scale(1.04);
   }
-
-
-  @keyframes tearStub{
-    0%{
-      transform:translateX(0) rotate(0deg);
-      opacity:1;
-    }
-    35%{
-      transform:translateX(-6px) rotate(-2deg);
-    }
-    100%{
-      transform:translateX(-145px) rotate(-9deg);
-      opacity:0;
-    }
+  100% {
+    opacity:1;
+    transform:scale(1);
   }
+}
 
-  @keyframes tearLine{
-    0%{
-      transform:scaleY(1);
-      opacity:1;
-    }
-    45%{
-      transform:scaleY(1.08);
-      opacity:1;
-    }
-    100%{
-      transform:scaleY(.2);
-      opacity:0;
-    }
-  }
-
-  @keyframes ticketKick{
-    0%{
-      transform:translateX(0);
-    }
-    45%{
-      transform:translateX(7px);
-    }
-    100%{
-      transform:translateX(0);
-    }
-  }
-
-  .ticket[data-recruitment="open"]{
-    cursor:pointer;
-  }
-
-  .ticket[data-recruitment="open"] .stub,
-  .ticket[data-recruitment="open"] .perforation,
-  .ticket[data-recruitment="open"] .ticket-main{
-    will-change:transform,opacity;
-  }
-
-  .ticket.is-tearing .stub{
-    animation:tearStub .72s cubic-bezier(.22,.75,.18,1) forwards;
-  }
-
-  .ticket.is-tearing .perforation{
-    animation:tearLine .52s ease-out forwards;
-  }
-
-  .ticket.is-tearing .ticket-main{
-    animation:ticketKick .42s ease-out .18s;
-  }
-
-  .ticket.is-tearing{
-    overflow:visible;
-  }
-
-
-  .ticket-action{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    margin-top:10px;
-    padding:9px 13px;
-    border-radius:12px;
-    border:1px solid #ddd2f4;
-    background:#fff;
-    color:var(--lilac-deep);
-    font-size:12px;
-    font-weight:800;
-    text-decoration:none;
+@keyframes yearFade {
+  from {
     opacity:0;
     transform:translateY(8px);
-    pointer-events:none;
-    transition:opacity .26s ease, transform .26s ease, box-shadow .2s ease, border-color .2s ease;
   }
-
-  .ticket-action:hover{
-    border-color:#cdbef0;
-    box-shadow:0 8px 18px rgba(87,66,137,.08);
-  }
-
-  .ticket.revealed .ticket-action{
+  to {
     opacity:1;
     transform:translateY(0);
-    pointer-events:auto;
   }
+}
 
+.ticket {
+  opacity:0;
+  animation:
+    ticketEnter .46s cubic-bezier(.2,.75,.2,1) forwards;
+  animation-delay:var(--delay,0ms);
+}
 
-  @keyframes soldStampIn{
-    0%{
-      opacity:0;
-      transform:translate(-50%,-50%) rotate(-13deg) scale(1.8);
-      filter:blur(2px);
-    }
-    55%{
-      opacity:1;
-      transform:translate(-50%,-50%) rotate(-9deg) scale(.92);
-      filter:blur(0);
-    }
-    78%{
-      transform:translate(-50%,-50%) rotate(-9deg) scale(1.04);
-    }
-    100%{
-      opacity:1;
-      transform:translate(-50%,-50%) rotate(-9deg) scale(1);
-    }
+.ticket .badge {
+  animation:badgePop .34s ease-out both;
+  animation-delay:calc(var(--delay,0ms) + 110ms);
+}
+
+.year-heading {
+  animation:yearFade .35s ease-out both;
+}
+
+/* OPEN 티켓 절취 애니메이션 */
+
+@keyframes tearStub {
+  0% {
+    transform:translateX(0) rotate(0deg);
+    opacity:1;
   }
-
-  @keyframes soldTicketImpact{
-    0%,100%{ transform:translateX(0) rotate(0deg); }
-    25%{ transform:translateX(-3px) rotate(-.18deg); }
-    50%{ transform:translateX(3px) rotate(.18deg); }
-    75%{ transform:translateX(-1px) rotate(-.08deg); }
+  35% {
+    transform:translateX(-6px) rotate(-2deg);
   }
-
-  @keyframes stampInkPulse{
-    0%{ opacity:.42; }
-    100%{ opacity:.13; }
-  }
-
-  .sold-stamp{
-    position:absolute;
-    left:68%;
-    top:50%;
-    z-index:8;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:156px;
-    height:62px;
-    border:4px double rgba(163,77,77,.78);
-    border-radius:10px;
-    color:rgba(163,77,77,.86);
-    background:rgba(255,255,255,.22);
-    font-family:'Arial Rounded MT Bold','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-    font-size:28px;
-    letter-spacing:.08em;
-    line-height:1;
+  100% {
+    transform:translateX(-145px) rotate(-9deg);
     opacity:0;
-    transform:translate(-50%,-50%) rotate(-9deg) scale(1.7);
-    pointer-events:none;
-    text-shadow:0 0 1px rgba(163,77,77,.26);
-    box-shadow:
-      inset 0 0 0 2px rgba(163,77,77,.08),
-      0 0 0 1px rgba(255,255,255,.35);
+  }
+}
+
+@keyframes tearLine {
+  0% {
+    transform:scaleY(1);
+    opacity:1;
+  }
+  45% {
+    transform:scaleY(1.08);
+    opacity:1;
+  }
+  100% {
+    transform:scaleY(.2);
+    opacity:0;
+  }
+}
+
+@keyframes ticketKick {
+  0% { transform:translateX(0); }
+  45% { transform:translateX(7px); }
+  100% { transform:translateX(0); }
+}
+
+.ticket[data-recruitment="open"] {
+  cursor:pointer;
+}
+
+.ticket[data-recruitment="open"] .stub,
+.ticket[data-recruitment="open"] .perforation,
+.ticket[data-recruitment="open"] .ticket-main {
+  will-change:transform,opacity;
+}
+
+.ticket.is-tearing .stub {
+  animation:
+    tearStub .72s cubic-bezier(.22,.75,.18,1) forwards;
+}
+
+.ticket.is-tearing .perforation {
+  animation:tearLine .52s ease-out forwards;
+}
+
+.ticket.is-tearing .ticket-main {
+  animation:ticketKick .42s ease-out .18s;
+}
+
+.ticket.is-tearing {
+  overflow:visible;
+}
+
+.ticket-action {
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  margin-top:10px;
+  padding:9px 13px;
+  border-radius:12px;
+  border:1px solid #ddd2f4;
+  background:#fff;
+  color:var(--lilac-deep);
+  font-size:12px;
+  font-weight:800;
+  text-decoration:none;
+  opacity:0;
+  transform:translateY(8px);
+  pointer-events:none;
+  transition:
+    opacity .26s ease,
+    transform .26s ease,
+    box-shadow .2s ease,
+    border-color .2s ease;
+}
+
+.ticket-action:hover {
+  border-color:#cdbef0;
+  box-shadow:0 8px 18px rgba(87,66,137,.08);
+}
+
+.ticket.revealed .ticket-action {
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+/* SOLD OUT 도장 애니메이션 */
+
+@keyframes soldStampIn {
+  0% {
+    opacity:0;
+    transform:
+      translate(-50%,-50%) rotate(-13deg) scale(1.8);
+    filter:blur(2px);
+  }
+  55% {
+    opacity:1;
+    transform:
+      translate(-50%,-50%) rotate(-9deg) scale(.92);
+    filter:blur(0);
+  }
+  78% {
+    transform:
+      translate(-50%,-50%) rotate(-9deg) scale(1.04);
+  }
+  100% {
+    opacity:1;
+    transform:
+      translate(-50%,-50%) rotate(-9deg) scale(1);
+  }
+}
+
+@keyframes soldTicketImpact {
+  0%,100% {
+    transform:translateX(0) rotate(0deg);
+  }
+  25% {
+    transform:translateX(-3px) rotate(-.18deg);
+  }
+  50% {
+    transform:translateX(3px) rotate(.18deg);
+  }
+  75% {
+    transform:translateX(-1px) rotate(-.08deg);
+  }
+}
+
+@keyframes stampInkPulse {
+  0% { opacity:.42; }
+  100% { opacity:.13; }
+}
+
+.sold-stamp {
+  position:absolute;
+  left:68%;
+  top:50%;
+  z-index:8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:156px;
+  height:62px;
+  border:4px double rgba(163,77,77,.78);
+  border-radius:10px;
+  color:rgba(163,77,77,.86);
+  background:rgba(255,255,255,.22);
+  font-family:'Arial Rounded MT Bold',
+    'Apple SD Gothic Neo','Noto Sans KR',
+    'Malgun Gothic',sans-serif;
+  font-size:28px;
+  letter-spacing:.08em;
+  line-height:1;
+  opacity:0;
+  transform:
+    translate(-50%,-50%) rotate(-9deg) scale(1.7);
+  pointer-events:none;
+  text-shadow:0 0 1px rgba(163,77,77,.26);
+  box-shadow:
+    inset 0 0 0 2px rgba(163,77,77,.08),
+    0 0 0 1px rgba(255,255,255,.35);
+}
+
+.sold-stamp::before,
+.sold-stamp::after {
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  background:rgba(163,77,77,.18);
+  pointer-events:none;
+}
+
+.sold-stamp::before {
+  width:6px;
+  height:6px;
+  left:17px;
+  bottom:9px;
+}
+
+.sold-stamp::after {
+  width:4px;
+  height:4px;
+  right:20px;
+  top:8px;
+}
+
+.ticket.stamp-hit {
+  animation:soldTicketImpact .34s ease-out;
+}
+
+.ticket.stamp-hit .sold-stamp {
+  animation:
+    soldStampIn .48s cubic-bezier(.2,.85,.22,1) forwards;
+}
+
+.ticket.stamp-hit::after {
+  animation:stampInkPulse .5s ease-out forwards;
+}
+
+/* 태블릿 */
+
+@media (max-width:780px) {
+  .stats {
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .sold-stamp::before,
-  .sold-stamp::after{
-    content:"";
-    position:absolute;
-    border-radius:50%;
-    background:rgba(163,77,77,.18);
-    pointer-events:none;
+  .control-row {
+    grid-template-columns:1fr 1fr;
   }
 
-  .sold-stamp::before{
-    width:6px;height:6px;
-    left:17px;bottom:9px;
+  .search-wrap {
+    grid-column:1/-1;
+  }
+}
+
+/* 모바일 최적화 */
+
+@media (max-width:560px) {
+  body {
+    padding:18px 10px 48px;
   }
 
-  .sold-stamp::after{
-    width:4px;height:4px;
-    right:20px;top:8px;
+  .hero {
+    padding:22px 18px;
   }
 
-  .ticket[data-recruitment="sold"]{
-    cursor:pointer;
+  .stats {
+    grid-template-columns:1fr;
   }
 
-  .ticket.stamp-hit{
-    animation:soldTicketImpact .34s ease-out;
+  .control-panel {
+    position:static;
+    margin:12px 0 14px;
+    padding:10px;
+    border-radius:16px;
   }
 
-  .ticket.stamp-hit .sold-stamp{
-    animation:soldStampIn .48s cubic-bezier(.2,.85,.22,1) forwards;
+  /* 검색 한 줄 + 필터 세 개 가로 배치 */
+  .control-row {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:7px;
   }
 
-  .ticket.stamp-hit::after{
-    animation:stampInkPulse .5s ease-out forwards;
+  .search-wrap {
+    grid-column:1/-1;
   }
 
-  @media (max-width:560px){
-    .sold-stamp{
-      left:62%;
-      width:124px;
-      height:52px;
-      font-size:22px;
-    }
+  .search-wrap::before {
+    left:10px;
+    font-size:17px;
   }
 
-  @media (prefers-reduced-motion: reduce){
-    *,
-    *::before,
-    *::after{
-      animation-duration:.001ms !important;
-      animation-iteration-count:1 !important;
-      transition-duration:.001ms !important;
-      scroll-behavior:auto !important;
-    }
-
-    .ticket{
-      opacity:1;
-      transform:none !important;
-    }
+  .control {
+    min-width:0;
+    height:38px;
+    border-radius:10px;
   }
 
-  @media (max-width:780px){
-    .stats{grid-template-columns:repeat(3,1fr)}
-    .control-row{grid-template-columns:1fr 1fr}
-    .search-wrap{grid-column:1/-1}
+  input.control {
+    padding:0 10px 0 34px;
+    font-size:16px;
   }
 
-  @media (max-width:560px){
-    body{padding:18px 10px 48px}
-    .hero{padding:22px 18px}
-    .stats{grid-template-columns:1fr}
-    .control-panel{top:8px}
-    .control-row{grid-template-columns:1fr}
-    .search-wrap{grid-column:auto}
-    .ticket{
-      grid-template-columns:118px 20px minmax(0,1fr);
-      min-height:122px;
-      border-radius:22px;
-    }
-    .ticket-main{
-      grid-template-columns:1fr;
-      padding:16px 16px 16px 18px;
-      gap:12px;
-    }
-    .status-side{
-      align-items:flex-start;
-    }
-    .event-title{font-size:15px}
-    .date{font-size:15px}
-    .date strong{font-size:21px}
-    .meta-row{
-      flex-direction:column;
-      align-items:flex-start;
-    }
-    .ticket[data-recruitment="sold"]::after{display:none}
+  select.control {
+    padding:0 16px 0 6px;
+    font-size:11px;
+    text-overflow:ellipsis;
   }
+
+  .meta-row {
+    flex-direction:row;
+    align-items:center;
+    gap:6px;
+    margin-top:8px;
+    font-size:11px;
+  }
+
+  .reset {
+    font-size:11px;
+    white-space:nowrap;
+  }
+
+  .ticket {
+    grid-template-columns:
+      118px 20px minmax(0,1fr);
+    min-height:122px;
+    border-radius:22px;
+  }
+
+  .ticket-main {
+    grid-template-columns:1fr;
+    padding:16px 16px 16px 18px;
+    gap:12px;
+  }
+
+  .status-side {
+    align-items:flex-start;
+  }
+
+  .event-title { font-size:15px; }
+  .date { font-size:15px; }
+  .date strong { font-size:21px; }
+
+  .ticket[data-recruitment="sold"]::after {
+    display:none;
+  }
+
+  .sold-stamp {
+    left:62%;
+    width:124px;
+    height:52px;
+    font-size:22px;
+  }
+}
+
+/* 모션 최소화 설정 */
+
+@media (prefers-reduced-motion:reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+
+  .ticket {
+    opacity:1;
+    transform:none !important;
+  }
+}
 </style>
 </head>
+
 <body>
 <div class="app">
+
   <section class="hero">
-    <div class="eyebrow">Hansaeka Event Support · Ticket Board</div>
-    <h1>한세카 이벤트 <span>맞헬퍼</span> 모집 현황</h1>
+    <div class="eyebrow">
+      Hansaeka Event Support · Ticket Board
+    </div>
+
+    <h1>
+      한세카 이벤트 <span>맞헬퍼</span> 모집 현황
+    </h1>
+
     <div class="stats">
       <div class="stat">
         <div class="label">TOTAL EVENTS</div>
         <div class="value" id="statTotal">0</div>
       </div>
+
       <div class="stat">
         <div class="label">OPEN</div>
         <div class="value open" id="statOpen">0</div>
       </div>
+
       <div class="stat">
         <div class="label">SOLD OUT</div>
         <div class="value sold" id="statSold">0</div>
@@ -804,7 +958,10 @@
 
     <div class="notice">
       <strong>📢 안내사항</strong><br>
-      ✦ 신청해주신 <b>시프트 및 참여 정보는 외부에 절대 공유되지 않습니다.</b><br>
+      ✦ 신청해주신
+      <b>
+        시프트 및 참여 정보는 외부에 절대 공유되지 않습니다.
+      </b><br>
       ✦ 문의 및 신청은 오픈채팅으로 부탁드립니다.<br>
       ✦ 월드링크 3차 츠카사 챕터 문의 받지 않습니다.
     </div>
@@ -813,7 +970,13 @@
   <section class="control-panel" aria-label="검색 및 필터">
     <div class="control-row">
       <div class="search-wrap">
-        <input id="search" class="control" type="search" placeholder="이벤트명 검색..." autocomplete="off" />
+        <input
+          id="search"
+          class="control"
+          type="search"
+          placeholder="이벤트명 검색..."
+          autocomplete="off"
+        >
       </div>
 
       <select id="statusFilter" class="control">
@@ -835,28 +998,42 @@
 
     <div class="meta-row">
       <span id="resultText">0개의 이벤트 표시 중</span>
-      <button id="resetButton" class="reset" type="button">필터 초기화</button>
+      <button id="resetButton" class="reset" type="button">
+        필터 초기화
+      </button>
     </div>
   </section>
 
   <main>
     <div id="list" class="timeline"></div>
+
     <div id="empty" class="empty">
-      조건에 맞는 이벤트가 없어요 🥲<br />
+      조건에 맞는 이벤트가 없어요 🥲<br>
       검색어나 필터를 바꿔보세요.
     </div>
   </main>
 
   <footer>
-    이 페이지는 신청 현황 공유용이며, 헬퍼 개인정보는 별도로 관리돼요.<br />
+    이 페이지는 신청 현황 공유용이며,
+    헬퍼 개인정보는 별도로 관리돼요.<br>
     문의 및 신청은
-    <a href="https://open.kakao.com/o/smuIXXmi" target="_blank" rel="noopener noreferrer">오픈채팅</a>으로 부탁드립니다 🩷
+    <a
+      href="https://open.kakao.com/o/smuIXXmi"
+      target="_blank"
+      rel="noopener noreferrer"
+    >오픈채팅</a>으로 부탁드립니다 🩷
   </footer>
+
 </div>
 
 <script>
 (() => {
   "use strict";
+
+  /* 이벤트 정보
+     마지막 숫자 2 이상: SOLD OUT
+     마지막 숫자 0 또는 1: OPEN
+  */
 
   const RAW_EVENTS = [
     ["2026-10-31","2026-11-08","Colors of Pure Sense",2],
@@ -894,8 +1071,7 @@
     ["2027-09-30","2027-10-10","Side by Side, Our Ways!",2],
     ["2027-10-12","2027-10-19","Stars Off Orbit",0],
     ["2027-10-21","2027-10-25","Vivid BAD SQUAD Memories",0],
-    ["2027-10-26","2027-10-30","MORE MORE JUMP! Memories",0],
-    ["2027-11-","2027-11-","",0]
+    ["2027-10-26","2027-10-30","MORE MORE JUMP! Memories",0]
   ];
 
   const AppConfig = Object.freeze({
@@ -907,8 +1083,12 @@
     constructor(id, [startAt, endAt, title, filled]) {
       this.id = id;
       this.title = title;
-      this.startAt = new Date(`${startAt}T00:00:00+09:00`);
-      this.endAt = new Date(`${endAt}T23:59:59+09:00`);
+      this.startAt = new Date(
+        `${startAt}T00:00:00+09:00`
+      );
+      this.endAt = new Date(
+        `${endAt}T23:59:59+09:00`
+      );
       this.filled = filled;
     }
 
@@ -922,20 +1102,52 @@
 
     get temporalStatus() {
       const now = new Date();
+
       if (now < this.startAt) return "upcoming";
       if (now > this.endAt) return "ended";
+
       return "ongoing";
     }
 
     get dDay() {
       const now = new Date();
-      return Math.ceil((this.startAt - now) / 86400000);
+      return Math.ceil(
+        (this.startAt - now) / 86400000
+      );
     }
   }
 
   class EventRepository {
     constructor(source) {
-      this.items = source.map((item, index) => new EventEntity(index + 1, item));
+      /* 잘못된 날짜 및 빈 이벤트 제거 */
+
+      const isValidDate = value => {
+        if (
+          typeof value !== "string" ||
+          !/^\d{4}-\d{2}-\d{2}$/.test(value)
+        ) {
+          return false;
+        }
+
+        const date = new Date(
+          `${value}T00:00:00+09:00`
+        );
+
+        return !Number.isNaN(date.getTime());
+      };
+
+      this.items = source
+        .filter(([startAt, endAt, title]) => {
+          return (
+            isValidDate(startAt) &&
+            isValidDate(endAt) &&
+            typeof title === "string" &&
+            title.trim().length > 0
+          );
+        })
+        .map((item, index) => {
+          return new EventEntity(index + 1, item);
+        });
     }
 
     all() {
@@ -943,7 +1155,11 @@
     }
 
     years() {
-      return [...new Set(this.items.map(item => item.year))].sort();
+      return [
+        ...new Set(
+          this.items.map(item => item.year)
+        )
+      ].sort();
     }
 
     statistics() {
@@ -951,30 +1167,54 @@
         acc.total++;
         acc[event.recruitmentStatus]++;
         return acc;
-      }, { total: 0, open: 0, sold: 0 });
+      }, {
+        total:0,
+        open:0,
+        sold:0
+      });
     }
   }
 
   class UrlState {
     static read() {
-      const params = new URLSearchParams(location.search);
+      const params = new URLSearchParams(
+        location.search
+      );
+
       return {
-        q: params.get("q") ?? "",
-        status: params.get("status") ?? "all",
-        year: params.get("year") ?? "all",
-        sort: params.get("sort") ?? "date-asc"
+        q:params.get("q") ?? "",
+        status:params.get("status") ?? "all",
+        year:params.get("year") ?? "all",
+        sort:params.get("sort") ?? "date-asc"
       };
     }
 
     static write(state) {
       const params = new URLSearchParams();
-      if (state.q) params.set("q", state.q);
-      if (state.status !== "all") params.set("status", state.status);
-      if (state.year !== "all") params.set("year", state.year);
-      if (state.sort !== "date-asc") params.set("sort", state.sort);
+
+      if (state.q) {
+        params.set("q", state.q);
+      }
+
+      if (state.status !== "all") {
+        params.set("status", state.status);
+      }
+
+      if (state.year !== "all") {
+        params.set("year", state.year);
+      }
+
+      if (state.sort !== "date-asc") {
+        params.set("sort", state.sort);
+      }
 
       const qs = params.toString();
-      history.replaceState(null, "", `${location.pathname}${qs ? `?${qs}` : ""}${location.hash}`);
+
+      history.replaceState(
+        null,
+        "",
+        `${location.pathname}${qs ? `?${qs}` : ""}${location.hash}`
+      );
     }
   }
 
@@ -984,21 +1224,45 @@
     }
 
     query(state) {
-      const keyword = state.q.trim().toLocaleLowerCase(AppConfig.locale);
+      const keyword = state.q
+        .trim()
+        .toLocaleLowerCase(AppConfig.locale);
 
-      const filtered = this.repository.all().filter(event => {
-        const matchesSearch = !keyword || event.title.toLocaleLowerCase(AppConfig.locale).includes(keyword);
-        const matchesStatus = state.status === "all" || event.recruitmentStatus === state.status;
-        const matchesYear = state.year === "all" || event.year === state.year;
-        return matchesSearch && matchesStatus && matchesYear;
-      });
+      const filtered = this.repository
+        .all()
+        .filter(event => {
+          const matchesSearch =
+            !keyword ||
+            event.title
+              .toLocaleLowerCase(AppConfig.locale)
+              .includes(keyword);
+
+          const matchesStatus =
+            state.status === "all" ||
+            event.recruitmentStatus === state.status;
+
+          const matchesYear =
+            state.year === "all" ||
+            event.year === state.year;
+
+          return (
+            matchesSearch &&
+            matchesStatus &&
+            matchesYear
+          );
+        });
 
       filtered.sort((a, b) => {
         switch (state.sort) {
           case "date-desc":
             return b.startAt - a.startAt;
+
           case "title-asc":
-            return a.title.localeCompare(b.title, AppConfig.locale);
+            return a.title.localeCompare(
+              b.title,
+              AppConfig.locale
+            );
+
           case "date-asc":
           default:
             return a.startAt - b.startAt;
@@ -1013,28 +1277,60 @@
     constructor() {
       this.list = document.getElementById("list");
       this.empty = document.getElementById("empty");
-      this.resultText = document.getElementById("resultText");
-      this.search = document.getElementById("search");
-      this.statusFilter = document.getElementById("statusFilter");
-      this.yearFilter = document.getElementById("yearFilter");
-      this.sortFilter = document.getElementById("sortFilter");
-      this.resetButton = document.getElementById("resetButton");
+
+      this.resultText = document.getElementById(
+        "resultText"
+      );
+
+      this.search = document.getElementById(
+        "search"
+      );
+
+      this.statusFilter = document.getElementById(
+        "statusFilter"
+      );
+
+      this.yearFilter = document.getElementById(
+        "yearFilter"
+      );
+
+      this.sortFilter = document.getElementById(
+        "sortFilter"
+      );
+
+      this.resetButton = document.getElementById(
+        "resetButton"
+      );
     }
 
     setStatistics(stats) {
-      document.getElementById("statTotal").textContent = stats.total;
-      document.getElementById("statOpen").textContent = stats.open;
-      document.getElementById("statSold").textContent = stats.sold;
+      document.getElementById(
+        "statTotal"
+      ).textContent = stats.total;
+
+      document.getElementById(
+        "statOpen"
+      ).textContent = stats.open;
+
+      document.getElementById(
+        "statSold"
+      ).textContent = stats.sold;
     }
 
     setYears(years) {
       const fragment = document.createDocumentFragment();
+
       years.forEach(year => {
-        const option = document.createElement("option");
+        const option = document.createElement(
+          "option"
+        );
+
         option.value = year;
         option.textContent = `${year}년`;
+
         fragment.appendChild(option);
       });
+
       this.yearFilter.appendChild(fragment);
     }
 
@@ -1046,19 +1342,35 @@
     }
 
     bind(onChange, onReset) {
-      const controls = [this.search, this.statusFilter, this.yearFilter, this.sortFilter];
+      const controls = [
+        this.search,
+        this.statusFilter,
+        this.yearFilter,
+        this.sortFilter
+      ];
+
       controls.forEach(control => {
-        control.addEventListener(control === this.search ? "input" : "change", onChange);
+        const eventName =
+          control === this.search ? "input" : "change";
+
+        control.addEventListener(
+          eventName,
+          onChange
+        );
       });
-      this.resetButton.addEventListener("click", onReset);
+
+      this.resetButton.addEventListener(
+        "click",
+        onReset
+      );
     }
 
     readState() {
       return {
-        q: this.search.value,
-        status: this.statusFilter.value,
-        year: this.yearFilter.value,
-        sort: this.sortFilter.value
+        q:this.search.value,
+        status:this.statusFilter.value,
+        year:this.yearFilter.value,
+        sort:this.sortFilter.value
       };
     }
 
@@ -1067,22 +1379,35 @@
 
       if (!events.length) {
         this.empty.style.display = "block";
-        this.resultText.textContent = "0개의 이벤트 표시 중";
+
+        this.resultText.textContent =
+          "0개의 이벤트 표시 중";
+
         return;
       }
 
       this.empty.style.display = "none";
-      this.resultText.textContent = `${events.length}개의 이벤트 표시 중`;
 
-      const fragment = document.createDocumentFragment();
+      this.resultText.textContent =
+        `${events.length}개의 이벤트 표시 중`;
+
+      const fragment =
+        document.createDocumentFragment();
+
       let currentYear = null;
 
       events.forEach(event => {
         if (currentYear !== event.year) {
           currentYear = event.year;
-          fragment.appendChild(this.createYearHeading(currentYear));
+
+          fragment.appendChild(
+            this.createYearHeading(currentYear)
+          );
         }
-        fragment.appendChild(this.createTicket(event));
+
+        fragment.appendChild(
+          this.createTicket(event)
+        );
       });
 
       this.list.appendChild(fragment);
@@ -1090,52 +1415,105 @@
 
     createYearHeading(year) {
       const node = document.createElement("div");
+
       node.className = "year-heading";
       node.textContent = year;
+
       return node;
     }
 
     createTicket(event) {
-      const article = document.createElement("article");
+      const article =
+        document.createElement("article");
+
       article.className = "ticket";
-      article.dataset.recruitment = event.recruitmentStatus;
-      article.style.setProperty("--delay", `${Math.min(event.id * 28, 420)}ms`);
+
+      article.dataset.recruitment =
+        event.recruitmentStatus;
+
+      article.style.setProperty(
+        "--delay",
+        `${Math.min(event.id * 28, 420)}ms`
+      );
 
       article.innerHTML = `
         <div class="stub">
-          <div class="event-no">NO. ${String(event.id).padStart(2, "0")}</div>
+          <div class="event-no">
+            NO. ${String(event.id).padStart(2,"0")}
+          </div>
+
           <div class="date">
-            ${this.formatDate(event.startAt, true)}
-            <strong>${this.formatDate(event.startAt, false)}</strong>
-            <small>~ ${this.formatDate(event.endAt, true)} ${this.formatDate(event.endAt, false)}</small>
+            ${this.formatDate(event.startAt,true)}
+
+            <strong>
+              ${this.formatDate(event.startAt,false)}
+            </strong>
+
+            <small>
+              ~ ${this.formatDate(event.endAt,true)}
+              ${this.formatDate(event.endAt,false)}
+            </small>
           </div>
         </div>
 
-        <div class="perforation" aria-hidden="true"></div>
+        <div
+          class="perforation"
+          aria-hidden="true"
+        ></div>
 
-        <div class="sold-stamp" aria-hidden="true">SOLD OUT</div>
+        <div
+          class="sold-stamp"
+          aria-hidden="true"
+        >SOLD OUT</div>
 
         <div class="ticket-main">
           <div>
-            <h2 class="event-title">${this.escapeHTML(event.title)}</h2>
+            <h2 class="event-title">
+              ${this.escapeHTML(event.title)}
+            </h2>
+
             <div class="chips">
               ${this.temporalChip(event)}
-              <span class="chip">${event.year}</span>
-              <span class="chip stubby">EVENT BOARD</span>
+
+              <span class="chip">
+                ${event.year}
+              </span>
+
+              <span class="chip stubby">
+                EVENT BOARD
+              </span>
             </div>
-            <div class="serial">EVENT PASS · ${event.year} · NO.${String(event.id).padStart(3, "0")}</div>
-            <a class="ticket-action"
-               href="https://open.kakao.com/o/smuIXXmi"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="오픈채팅으로 신청 및 문의하기">
+
+            <div class="serial">
+              EVENT PASS · ${event.year} ·
+              NO.${String(event.id).padStart(3,"0")}
+            </div>
+
+            <a
+              class="ticket-action"
+              href="https://open.kakao.com/o/smuIXXmi"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="오픈채팅으로 신청 및 문의하기"
+            >
               신청 / 문의하기 →
             </a>
           </div>
 
           <div class="status-side">
-            <div class="badge ${event.recruitmentStatus}">${this.statusLabel(event.recruitmentStatus)}</div>
-            <div class="status-note">${this.statusText(event.recruitmentStatus)}</div>
+            <div
+              class="badge ${event.recruitmentStatus}"
+            >
+              ${this.statusLabel(
+                event.recruitmentStatus
+              )}
+            </div>
+
+            <div class="status-note">
+              ${this.statusText(
+                event.recruitmentStatus
+              )}
+            </div>
           </div>
         </div>
       `;
@@ -1145,93 +1523,164 @@
 
     temporalChip(event) {
       if (event.temporalStatus === "ongoing") {
-        return `<span class="chip now">NOW · 진행 중</span>`;
-      }
-      if (event.temporalStatus === "ended") {
-        return `<span class="chip ended">ENDED</span>`;
+        return `
+          <span class="chip now">
+            NOW · 진행 중
+          </span>
+        `;
       }
 
-      const days = Math.max(0, event.dDay);
-      return `<span class="chip dday">${days === 0 ? "D-DAY" : `D-${days}`}</span>`;
+      if (event.temporalStatus === "ended") {
+        return `
+          <span class="chip ended">
+            ENDED
+          </span>
+        `;
+      }
+
+      const days = Math.max(0,event.dDay);
+
+      return `
+        <span class="chip dday">
+          ${days === 0 ? "D-DAY" : `D-${days}`}
+        </span>
+      `;
     }
 
     statusLabel(status) {
-      return status === "sold" ? "SOLD OUT" : "OPEN";
+      return status === "sold"
+        ? "SOLD OUT"
+        : "OPEN";
     }
 
     statusText(status) {
-      return status === "sold" ? "현재 모집이 마감되었어요." : "현재 신청 가능한 상태예요.";
+      return status === "sold"
+        ? "현재 모집이 마감되었어요."
+        : "현재 신청 가능한 상태예요.";
     }
 
     formatDate(date, monthOnly) {
-      const parts = new Intl.DateTimeFormat(AppConfig.locale, {
-        timeZone: AppConfig.timeZone,
-        month: "2-digit",
-        day: "2-digit"
-      }).formatToParts(date);
+      const parts = new Intl.DateTimeFormat(
+        AppConfig.locale,
+        {
+          timeZone:AppConfig.timeZone,
+          month:"2-digit",
+          day:"2-digit"
+        }
+      ).formatToParts(date);
 
-      const month = parts.find(p => p.type === "month")?.value ?? "";
-      const day = parts.find(p => p.type === "day")?.value ?? "";
+      const month =
+        parts.find(p => p.type === "month")?.value ?? "";
+
+      const day =
+        parts.find(p => p.type === "day")?.value ?? "";
+
       return monthOnly ? month : day;
     }
 
     escapeHTML(value) {
-      const node = document.createElement("div");
+      const node =
+        document.createElement("div");
+
       node.textContent = value;
+
       return node.innerHTML;
     }
   }
 
   class EventApplication {
     constructor() {
-      this.repository = new EventRepository(RAW_EVENTS);
-      this.service = new EventService(this.repository);
+      this.repository = new EventRepository(
+        RAW_EVENTS
+      );
+
+      this.service = new EventService(
+        this.repository
+      );
+
       this.view = new View();
+
       this.state = UrlState.read();
     }
 
     bootstrap() {
-      this.view.setStatistics(this.repository.statistics());
-      this.view.setYears(this.repository.years());
+      this.view.setStatistics(
+        this.repository.statistics()
+      );
 
-      const validYears = new Set(["all", ...this.repository.years()]);
-      if (!validYears.has(this.state.year)) this.state.year = "all";
+      this.view.setYears(
+        this.repository.years()
+      );
+
+      const validYears = new Set([
+        "all",
+        ...this.repository.years()
+      ]);
+
+      if (!validYears.has(this.state.year)) {
+        this.state.year = "all";
+      }
 
       this.view.applyState(this.state);
+
       this.view.bind(
         () => this.syncFromView(),
         () => this.reset()
       );
+
       this.render();
     }
 
     syncFromView() {
       this.state = this.view.readState();
+
       UrlState.write(this.state);
+
       this.render();
     }
 
     reset() {
-      this.state = { q: "", status: "all", year: "all", sort: "date-asc" };
+      this.state = {
+        q:"",
+        status:"all",
+        year:"all",
+        sort:"date-asc"
+      };
+
       this.view.applyState(this.state);
+
       UrlState.write(this.state);
+
       this.render();
     }
 
     render() {
-      this.view.render(this.service.query(this.state));
+      this.view.render(
+        this.service.query(this.state)
+      );
     }
   }
-
 
   const app = new EventApplication();
   app.bootstrap();
 
-  document.addEventListener("click", event => {
-    if (event.target.closest(".ticket-action")) return;
+  /* OPEN 티켓 클릭 */
 
-    const ticket = event.target.closest('.ticket[data-recruitment="open"]');
-    if (!ticket || ticket.classList.contains("is-tearing")) return;
+  document.addEventListener("click", event => {
+    if (event.target.closest(".ticket-action")) {
+      return;
+    }
+
+    const ticket = event.target.closest(
+      '.ticket[data-recruitment="open"]'
+    );
+
+    if (
+      !ticket ||
+      ticket.classList.contains("is-tearing")
+    ) {
+      return;
+    }
 
     if (ticket.classList.contains("revealed")) {
       ticket.classList.remove("revealed");
@@ -1242,27 +1691,37 @@
 
     window.setTimeout(() => {
       ticket.classList.add("revealed");
-    }, 430);
+    },430);
 
     window.setTimeout(() => {
       ticket.classList.remove("is-tearing");
-    }, 1100);
+    },1100);
   });
 
+  /* SOLD OUT 티켓 클릭 */
 
   document.addEventListener("click", event => {
-    if (event.target.closest(".ticket-action")) return;
+    if (event.target.closest(".ticket-action")) {
+      return;
+    }
 
-    const soldTicket = event.target.closest('.ticket[data-recruitment="sold"]');
-    if (!soldTicket) return;
+    const soldTicket = event.target.closest(
+      '.ticket[data-recruitment="sold"]'
+    );
+
+    if (!soldTicket) {
+      return;
+    }
 
     soldTicket.classList.remove("stamp-hit");
+
     void soldTicket.offsetWidth;
+
     soldTicket.classList.add("stamp-hit");
 
     window.setTimeout(() => {
       soldTicket.classList.remove("stamp-hit");
-    }, 1000);
+    },1000);
   });
 
 })();
